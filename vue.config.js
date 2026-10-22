@@ -1,6 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
-module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/cfe-2/'
-    : '/'
-}
+module.exports = defineConfig({
+  publicPath: '/pagina-cfe/'
+})
