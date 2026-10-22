@@ -1,16 +1,13 @@
 <template>
   <aside class="sidebar">
-    <div class="menu-group">
-      <h3 class="menu-title">Sobre Nosotros</h3>
+    <div v-if="menu" class="menu-group">
+      <h3 class="menu-title">{{ menu.titulo }}</h3>
       <ul>
-        <li v-for="opcion in sobreNosotros" :key="opcion">› {{ opcion }}</li>
+        <li v-for="opcion in menu.opciones" :key="opcion.texto">
+          <router-link v-if="opcion.ruta" :to="opcion.ruta">› {{ opcion.texto }}</router-link>
+          <span v-else>› {{ opcion.texto }}</span>
+        </li>
       </ul>
-    </div>
-
-    <div class="menu-group">
-      <h3 class="menu-title">Directorio ⌄</h3>
-      <h3 class="menu-title">Servicios Internos ⌄</h3>
-      <h3 class="menu-title">Enlaces ⌄</h3>
     </div>
 
     <CalendarioFestivos />
@@ -25,17 +22,30 @@ export default {
   components: { CalendarioFestivos },
   data() {
     return {
-      sobreNosotros: [
-        'Visión, Misión y Ambición',
-        'Objetivos e Indicadores',
-        'Organigrama',
-        '¿Quiénes somos?',
-        'Nuestra Historia',
-        'Cronología de Jefes de Subárea',
-        'Operadores desde 1973 a la fecha',
-        'Nuestros Recuerdos'
-      ]
+      // Opciones del menú lateral para cada pestaña de la barra superior.
+      // "ruta" es la página que se abre al dar clic; null si aún no existe.
+      menus: {
+        inicio: {
+          titulo: 'Inicio',
+          opciones: [
+            { texto: 'Nuestro Centro de Trabajo', ruta: '/ubicacion' },
+            { texto: 'Escenario Tecnológico', ruta: null },
+            { texto: 'Misión, Visión y Ambición', ruta: '/vision-mision-ambicion' },
+            { texto: 'Organigrama', ruta: null },
+            { texto: 'Directorio ZOTGM', ruta: null },
+            { texto: 'Directorio ZOTPT', ruta: null },
+            { texto: 'Directorio ZOTVER', ruta: null },
+            { texto: 'GRTC', ruta: null }
+          ]
+        }
+      }
     };
+  },
+  computed: {
+    // Menú de la sección en la que está el usuario
+    menu() {
+      return this.menus[this.$route.meta.seccion || 'inicio'];
+    }
   }
 }
 </script>
@@ -56,6 +66,8 @@ export default {
 .sidebar ul { list-style: none; padding: 0; margin: 0; }
 .sidebar li { padding: 6px 0; color: #555; font-size: 13px; cursor: pointer; transition: color 0.3s; }
 .sidebar li:hover { color: #009a44; }
+.sidebar li a { color: inherit; text-decoration: none; }
+.sidebar li a.router-link-active { color: #009a44; font-weight: bold; }
 
 /* Móviles y tablets: que ocupe todo el ancho */
 @media (max-width: 768px) {

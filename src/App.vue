@@ -11,10 +11,9 @@
       <!-- Columna Izquierda: Menú Lateral y Calendario -->
       <SideMenu />
 
-      <!-- Columna Derecha: Contenido -->
+      <!-- Columna Derecha: Contenido de la página elegida -->
       <main class="content-area">
-        <SitiosInteres />
-        <ActualizacionesRecientes />
+        <router-view />
       </main>
     </div>
 
@@ -27,8 +26,6 @@
 import NavBar from './components/NavBar.vue';
 import HeroCarousel from './components/HeroCarousel.vue';
 import SideMenu from './components/SideMenu.vue';
-import SitiosInteres from './components/SitiosInteres.vue';
-import ActualizacionesRecientes from './components/ActualizacionesRecientes.vue';
 import AppFooter from './components/AppFooter.vue';
 
 export default {
@@ -37,8 +34,6 @@ export default {
     NavBar,
     HeroCarousel,
     SideMenu,
-    SitiosInteres,
-    ActualizacionesRecientes,
     AppFooter
   }
 }
@@ -66,7 +61,7 @@ body, html {
   gap: 20px;
   width: 100%;
 }
-.content-area { flex-grow: 1; }
+.content-area { flex-grow: 1; min-width: 0; }
 
 /* Secciones compartidas (Sitios de Interés, Actualizaciones) */
 .section { margin-bottom: 30px; }

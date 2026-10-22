@@ -4,6 +4,9 @@
       <img src="@/assets/logo-cfe.png" alt="CFE" class="logo-cfe" />
     </div>
     <ul class="nav-links">
+      <li>
+        <router-link to="/" :class="{ activo: $route.meta.seccion === 'inicio' }">Inicio</router-link>
+      </li>
       <li v-for="enlace in enlaces" :key="enlace">
         <a href="#">{{ enlace }}</a>
       </li>
@@ -17,7 +20,7 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      enlaces: ['Inicio', 'Superintendencia', 'Operación', 'Programación y Equipos', 'Enlaces']
+      enlaces: ['Superintendencia', 'Operación', 'Programación y Equipos', 'Enlaces']
     };
   }
 }
@@ -38,6 +41,7 @@ export default {
 .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
 .nav-links a { text-decoration: none; color: #555; font-size: 14px; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: #009a44; }
+.nav-links a.activo { color: #009a44; font-weight: bold; }
 .btn-login {
   background-color: #009a44; color: white; border-radius: 20px;
   padding: 8px 20px; border: none; cursor: pointer; font-weight: bold; font-size: 14px;
