@@ -16,35 +16,15 @@
 
 <script>
 import CalendarioFestivos from './CalendarioFestivos.vue';
+import { menus } from '@/data/menus';
 
 export default {
   name: 'SideMenu',
   components: { CalendarioFestivos },
-  data() {
-    return {
-      // Opciones del menú lateral para cada pestaña de la barra superior.
-      // "ruta" es la página que se abre al dar clic; null si aún no existe.
-      menus: {
-        inicio: {
-          titulo: 'Inicio',
-          opciones: [
-            { texto: 'Nuestro Centro de Trabajo', ruta: '/ubicacion' },
-            { texto: 'Escenario Tecnológico', ruta: null },
-            { texto: 'Misión, Visión y Ambición', ruta: '/vision-mision-ambicion' },
-            { texto: 'Organigrama', ruta: null },
-            { texto: 'Directorio ZOTGM', ruta: null },
-            { texto: 'Directorio ZOTPT', ruta: null },
-            { texto: 'Directorio ZOTVER', ruta: null },
-            { texto: 'GRTC', ruta: null }
-          ]
-        }
-      }
-    };
-  },
   computed: {
     // Menú de la sección en la que está el usuario
     menu() {
-      return this.menus[this.$route.meta.seccion || 'inicio'];
+      return menus[this.$route.meta.seccion || 'inicio'];
     }
   }
 }
@@ -69,14 +49,12 @@ export default {
 .sidebar li a { color: inherit; text-decoration: none; }
 .sidebar li a.router-link-active { color: #009a44; font-weight: bold; }
 
-/* Móviles y tablets: que ocupe todo el ancho */
+/* Móviles y tablets: el menú pasa al botón ☰ y aquí solo queda el calendario */
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
     margin-bottom: 20px;
   }
-  .sidebar .menu-group { margin-bottom: 10px; }
-  .sidebar ul { display: flex; flex-wrap: wrap; gap: 5px; }
-  .sidebar li { width: 100%; }
+  .menu-group { display: none; }
 }
 </style>

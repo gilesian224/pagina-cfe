@@ -1,9 +1,9 @@
 <template>
   <div class="calendar-card">
     <div class="calendar-header">
-      <button class="btn-nav" @click="cambiarMes(-1)">&#10094;</button>
+      <button class="btn-nav" aria-label="Mes anterior" @click="cambiarMes(-1)">&#10094;</button>
       <h3>{{ nombreMes }} {{ anioActual }}</h3>
-      <button class="btn-nav" @click="cambiarMes(1)">&#10095;</button>
+      <button class="btn-nav" aria-label="Mes siguiente" @click="cambiarMes(1)">&#10095;</button>
     </div>
 
     <div class="calendar-grid dias-semana">
@@ -16,38 +16,35 @@
         v-for="dia in diasDelMes"
         :key="dia"
         class="calendar-day"
-        :class="{
-          'hoy': esHoy(dia),
-          'festivo': esFestivo(dia),
-          'no-laborable': esNoLaborable(dia)
-        }"
+        :class="clasesDelDia(dia)"
+        :title="textoDelDia(dia)"
       >
         {{ dia }}
       </div>
+    </div>
+
+    <!-- Eventos del mes: festivos, no laborables y cumpleaños -->
+    <div class="eventos">
+      <h4>Este mes</h4>
+      <ul v-if="eventosDelMes.length">
+        <li v-for="evento in eventosDelMes" :key="evento.tipo + evento.dia + evento.nombre" :class="'evento-' + evento.tipo">
+          <span class="evento-dia">{{ evento.dia }}</span>
+          <span>{{ evento.tipo === 'cumpleanos' ? '🎂 ' : '' }}{{ evento.nombre }}</span>
+        </li>
+      </ul>
+      <p v-else class="sin-eventos">Sin días festivos ni cumpleaños.</p>
     </div>
   </div>
 </template>
 
 <script>
+import { festivos, noLaborables, cumpleanos } from '@/data/calendario';
+
 export default {
   name: 'CalendarioFestivos',
   data() {
     return {
-      fechaActual: new Date(),
-
-      // Días de descanso obligatorios LFT / CFE para 2026 (Ya incluyen los inhábiles)
-      festivos2026: [
-        '0-1',   // 1 de enero (Año Nuevo)
-        '1-2',   // 2 de febrero (Constitución)
-        '2-16',  // 16 de marzo (Natalicio Benito Juárez)
-        '4-1',   // 1 de mayo (Día del Trabajo)
-        '8-16',  // 16 de septiembre (Independencia)
-        '10-16', // 16 de noviembre (Revolución Mexicana)
-        '11-25'  // 25 de diciembre (Navidad)
-      ],
-
-      // Arreglo vacío por si después quieres agregar días puente o no laborables extra
-      noLaborables2026: []
+      fechaActual: new Date()
     };
   },
   computed: {
@@ -66,6 +63,19 @@ export default {
     },
     primerDiaSemana() {
       return new Date(this.anioActual, this.mesActual, 1).getDay();
+    },
+    // Todos los eventos del mes que se está viendo, ordenados por día
+    eventosDelMes() {
+      const mes = this.mesActual + 1;
+      const delMes = (lista, tipo) => (lista || [])
+        .filter(e => e.mes === mes)
+        .map(e => ({ ...e, tipo }));
+
+      return [
+        ...delMes(festivos[this.anioActual], 'festivo'),
+        ...delMes(noLaborables[this.anioActual], 'no-laborable'),
+        ...delMes(cumpleanos, 'cumpleanos')
+      ].sort((a, b) => a.dia - b.dia);
     }
   },
   methods: {
@@ -78,17 +88,23 @@ export default {
              this.mesActual === hoy.getMonth() &&
              this.anioActual === hoy.getFullYear();
     },
-    esFestivo(dia) {
-      if (this.anioActual === 2026) {
-        return this.festivos2026.includes(`${this.mesActual}-${dia}`);
-      }
-      return false;
+    eventosDelDia(dia) {
+      return this.eventosDelMes.filter(e => e.dia === dia);
     },
-    esNoLaborable(dia) {
-      if (this.anioActual === 2026) {
-        return this.noLaborables2026.includes(`${this.mesActual}-${dia}`);
-      }
-      return false;
+    clasesDelDia(dia) {
+      const tipos = this.eventosDelDia(dia).map(e => e.tipo);
+      return {
+        'hoy': this.esHoy(dia),
+        'festivo': tipos.includes('festivo'),
+        'no-laborable': tipos.includes('no-laborable'),
+        'cumpleanos': tipos.includes('cumpleanos')
+      };
+    },
+    // Texto que aparece al pasar el mouse sobre el día
+    textoDelDia(dia) {
+      return this.eventosDelDia(dia)
+        .map(e => (e.tipo === 'cumpleanos' ? `Cumpleaños: ${e.nombre}` : e.nombre))
+        .join('\n') || null;
     }
   }
 }
@@ -156,6 +172,7 @@ export default {
 }
 
 .calendar-day {
+  position: relative;
   padding: 4px 0;
   font-size: 11px;
   color: #333;
@@ -194,10 +211,59 @@ export default {
   border: none !important;
 }
 
+/* Cumpleaños: punto dorado debajo del número (se ve aunque sea festivo u hoy) */
+.calendar-day.cumpleanos::after {
+  content: '';
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #e2a400;
+}
+
+/* Lista de eventos del mes */
+.eventos {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+.eventos h4 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #333;
+}
+.eventos ul { list-style: none; margin: 0; padding: 0; }
+.eventos li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 11px;
+  color: #444;
+}
+.evento-dia {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+.evento-festivo .evento-dia { background: #ffe5e5; color: #d32f2f; border: 1px solid #ffcdd2; }
+.evento-no-laborable .evento-dia { background: #fff3e0; color: #e65100; border: 1px dashed #ffb74d; }
+.evento-cumpleanos .evento-dia { background: #fdf6dc; color: #9a7400; border: 1px solid #e2c044; }
+.sin-eventos { margin: 0; font-size: 11px; color: #888; }
+
 /* Móviles y tablets */
 @media (max-width: 768px) {
   .calendar-card { padding: 10px; }
   .calendar-day { padding: 6px 0; font-size: 12px; }
   .dias-semana div { font-size: 11px; }
+  .eventos li { font-size: 13px; }
 }
 </style>
