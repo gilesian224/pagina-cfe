@@ -5,7 +5,7 @@ export const pestanas = [
   { texto: 'Superintendencia', ruta: null, seccion: null },
   { texto: 'Operación', ruta: null, seccion: null },
   { texto: 'Programación y Equipos', ruta: null, seccion: null },
-  { texto: 'Enlaces', ruta: null, seccion: null }
+  { texto: 'Enlaces', ruta: /Enlace, seccion: 'enlaces' }
 ];
 
 // Opciones del menú lateral para cada sección.
@@ -20,8 +20,8 @@ export const menus = {
       { texto: 'Directorio ZOTGM', ruta: null },
       { texto: 'Directorio ZOTPT', ruta: null },
       { texto: 'Directorio ZOTVER', ruta: null },
-      { texto: 'GRTC', ruta: null },
-      { texto: 'Enlaces', ruta: '/Enlaces' }
+      { texto: 'GRTC', ruta: null }
+      
     
     ]
   }
