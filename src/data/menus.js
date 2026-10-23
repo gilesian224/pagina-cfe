@@ -20,7 +20,9 @@ export const menus = {
       { texto: 'Directorio ZOTGM', ruta: null },
       { texto: 'Directorio ZOTPT', ruta: null },
       { texto: 'Directorio ZOTVER', ruta: null },
-      { texto: 'GRTC', ruta: null }
+      { texto: 'GRTC', ruta: null },
+      { texto: 'Enlaces', ruta: '/Enlaces' }
+    
     ]
   }
 };
