@@ -10,8 +10,8 @@ import UbicacionView from '../views/UbicacionView.vue';
 const routes = [
   { path: '/', name: 'inicio', component: InicioView, meta: { seccion: 'inicio' } },
   { path: '/ubicacion', name: 'ubicacion', component: UbicacionView, meta: { seccion: 'inicio' } },
-  { path: '/vision-mision-ambicion', name: 'vision-mision', component: VisionMisionView, meta: { seccion: 'inicio' } }
-  { path: '/Enlaces', name: 'Enlaces', component: EnlacesView, meta: { seccion: 'Enlaces' } },
+  { path: '/vision-mision-ambicion', name: 'vision-mision', component: VisionMisionView, meta: { seccion: 'inicio' } },
+  { path: '/Enlaces', name: 'Enlaces', component: EnlacesView, meta: { seccion: 'Enlaces' } }
 ];
 
 export default createRouter({
