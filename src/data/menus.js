@@ -5,7 +5,7 @@ export const pestanas = [
   { texto: 'Superintendencia', ruta: null, seccion: null },
   { texto: 'Operación', ruta: null, seccion: null },
   { texto: 'Programación y Equipos', ruta: null, seccion: null },
-  { texto: 'Enlaces', ruta: /Enlace, seccion: 'enlaces' }
+  { texto: 'Enlaces', ruta: /enlaces, seccion: 'enlaces' }
 ];
 
 // Opciones del menú lateral para cada sección.
@@ -24,5 +24,10 @@ export const menus = {
       
     
     ]
+    Enlaces: {
+      titulo: "Enlaces",
+        opciones: [
+        { texto: 'Todos los enlaces', ruta: '/enlaces'}
+        ]
   }
 };
