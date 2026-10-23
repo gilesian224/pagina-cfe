@@ -24,8 +24,9 @@ export const menus = {
       
     
     ]
-    Enlaces: {
-      titulo: "Enlaces",
+  },
+    enlaces: {
+      titulo: 'Enlaces',
         opciones: [
         { texto: 'Todos los enlaces', ruta: '/enlaces'}
         ]
