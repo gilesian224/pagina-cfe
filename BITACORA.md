@@ -50,3 +50,46 @@ En `main`, la pestaña tenía `ruta: /enlaces` sin comillas. Eso es un error de 
 | Enlace | URL | Categoría | Notas |
 |---|---|---|---|
 | SIMOCE: Sistema de Monitoreo de Calidad de Energía | `http://10.9.30.134/calidad/` | Sistemas internos | 🔒 Solo red CFE |
+
+---
+
+## 2026-10-27
+
+### Páginas del menú lateral de Inicio (solo títulos)
+
+**Qué se pidió**
+Dar acceso a todas las opciones de la barra lateral izquierda, con solo el título de cada sección por ahora.
+
+**Estado:** en revisión (pull request abierto). Depende del PR de Enlaces (#1): primero se une #1 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/EscenarioTecnologicoView.vue` | **Nuevo.** Página con el título "Escenario Tecnológico". |
+| `src/views/OrganigramaView.vue` | **Nuevo.** Página con el título "Organigrama". |
+| `src/views/DirectorioZotgmView.vue` | **Nuevo.** Página con el título "Directorio ZOTGM". |
+| `src/views/DirectorioZotptView.vue` | **Nuevo.** Página con el título "Directorio ZOTPT". |
+| `src/views/DirectorioZotverView.vue` | **Nuevo.** Página con el título "Directorio ZOTVER". |
+| `src/views/GrtcView.vue` | **Nuevo.** Página con el título "GRTC". |
+| `src/router/index.js` | Seis rutas nuevas, una por página. |
+| `src/data/menus.js` | Las opciones que tenían `ruta: null` ahora apuntan a su página. |
+
+**Cómo funciona**
+
+1. **Cada página es un archivo `.vue` mínimo.** Solo tiene la sección con su título (`<h2 class="section-title">`), con el mismo estilo que el resto de la página, y un comentario que marca dónde irá el contenido.
+
+2. **Las rutas** (`router/index.js`) conectan cada dirección con su página. Por ejemplo, `#/organigrama` muestra `OrganigramaView.vue`. Todas llevan `meta: { seccion: 'inicio' }`, así la pestaña **Inicio** sigue marcada en la barra superior y el menú lateral sigue siendo el de Inicio.
+
+3. **El menú** (`menus.js`). En `SideMenu.vue` y `NavBar.vue`, una opción con `ruta: null` se dibuja como texto simple (`<span>`) y una con ruta se dibuja como enlace (`<router-link>`). Al cambiar `null` por la dirección, las opciones se vuelven clicables y la opción de la página actual se marca en verde, tanto en la barra lateral como en el menú ☰ del celular.
+
+**Rutas nuevas**
+
+| Opción del menú | Dirección |
+|---|---|
+| Escenario Tecnológico | `#/escenario-tecnologico` |
+| Organigrama | `#/organigrama` |
+| Directorio ZOTGM | `#/directorio-zotgm` |
+| Directorio ZOTPT | `#/directorio-zotpt` |
+| Directorio ZOTVER | `#/directorio-zotver` |
+| GRTC | `#/grtc` |
