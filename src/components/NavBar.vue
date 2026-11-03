@@ -37,8 +37,10 @@
           </ul>
         </li>
       </ul>
-      <button class="btn-login">Iniciar sesión</button>
     </div>
+
+    <!-- Logo de la Zona de Operación de Transmisión Puebla-Tlaxcala -->
+    <img src="@/assets/logo-zotptx.jpg" alt="ZOTPTX" class="logo-zona" />
   </nav>
 </template>
 
@@ -93,11 +95,11 @@ export default {
 .nav-links a { text-decoration: none; color: #555; font-size: 14px; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: #009a44; }
 .nav-links a.activo { color: #009a44; font-weight: bold; }
-.btn-login {
-  background-color: #009a44; color: white; border-radius: 20px;
-  padding: 8px 20px; border: none; cursor: pointer; font-weight: bold; font-size: 14px;
+.logo-zona {
+  height: 55px;
+  width: auto;
+  margin-left: 20px;
 }
-.btn-login:hover { background-color: #007a33; }
 
 /* En escritorio el submenú y el botón ☰ no se muestran */
 .submenu { display: none; }
@@ -151,6 +153,14 @@ export default {
   .submenu li { padding: 8px 5px; font-size: 13px; color: #555; }
   /* El estilo de los enlaces y submenús lo pone MenuOpcion.vue */
 
-  .btn-login { margin: 15px auto 5px auto; }
+  /* En celular: logo CFE a la izquierda, luego el logo ZOTPTX y el botón ☰ a la derecha;
+     el menú desplegable baja debajo de los tres */
+  .logo-zona {
+    order: 1;
+    height: 42px;
+    margin: 0 12px 0 auto;
+  }
+  .btn-menu { order: 2; }
+  .nav-menu { order: 3; }
 }
 </style>
