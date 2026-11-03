@@ -1,3 +1,5 @@
+import { categorias } from './enlaces';
+
 // Pestañas de la barra superior.
 // "seccion" enlaza cada pestaña con su menú lateral (abajo); "ruta" es null si aún no existe la página.
 export const pestanas = [
@@ -5,7 +7,7 @@ export const pestanas = [
   { texto: 'Superintendencia', ruta: null, seccion: null },
   { texto: 'Operación', ruta: null, seccion: null },
   { texto: 'Programación y Equipos', ruta: null, seccion: null },
-  { texto: 'Enlaces', ruta: /enlaces, seccion: 'enlaces' }
+  { texto: 'Enlaces', ruta: '/enlaces', seccion: 'enlaces' }
 ];
 
 // Opciones del menú lateral para cada sección.
@@ -21,14 +23,11 @@ export const menus = {
       { texto: 'Directorio ZOTPT', ruta: null },
       { texto: 'Directorio ZOTVER', ruta: null },
       { texto: 'GRTC', ruta: null }
-      
-    
     ]
   },
-    enlaces: {
-      titulo: 'Enlaces',
-        opciones: [
-        { texto: 'Todos los enlaces', ruta: '/enlaces'}
-        ]
+  enlaces: {
+    titulo: 'Enlaces',
+    // Se genera solo a partir de las categorías de enlaces.js
+    opciones: categorias.map(c => ({ texto: c.nombre, ruta: '/enlaces/' + c.id }))
   }
 };

@@ -12,7 +12,7 @@ const routes = [
   { path: '/', name: 'inicio', component: InicioView, meta: { seccion: 'inicio' } },
   { path: '/ubicacion', name: 'ubicacion', component: UbicacionView, meta: { seccion: 'inicio' } },
   { path: '/vision-mision-ambicion', name: 'vision-mision', component: VisionMisionView, meta: { seccion: 'inicio' } },
-  { path: '/enlaces', name: 'enlaces', component: EnlacesView, meta: { seccion: 'enlaces' } }
+  { path: '/enlaces/:categoria?', name: 'enlaces', component: EnlacesView, meta: { seccion: 'enlaces' } }
 ];
 
 export default createRouter({
