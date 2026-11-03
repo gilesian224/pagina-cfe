@@ -9,6 +9,9 @@ import DirectorioZotgmView from '../views/DirectorioZotgmView.vue';
 import DirectorioZotptView from '../views/DirectorioZotptView.vue';
 import DirectorioZotverView from '../views/DirectorioZotverView.vue';
 import GrtcView from '../views/GrtcView.vue';
+import SuperintendenciaView from '../views/SuperintendenciaView.vue';
+import ListaAsistenciaView from '../views/ListaAsistenciaView.vue';
+import FormatoAsistenciaView from '../views/FormatoAsistenciaView.vue';
 
 // Se usa el modo hash (#/ruta) para que las páginas internas
 // funcionen en GitHub Pages sin errores 404 al recargar.
@@ -24,6 +27,9 @@ const routes = [
   { path: '/directorio-zotpt', name: 'directorio-zotpt', component: DirectorioZotptView, meta: { seccion: 'inicio' } },
   { path: '/directorio-zotver', name: 'directorio-zotver', component: DirectorioZotverView, meta: { seccion: 'inicio' } },
   { path: '/grtc', name: 'grtc', component: GrtcView, meta: { seccion: 'inicio' } },
+  { path: '/superintendencia', name: 'superintendencia', component: SuperintendenciaView, meta: { seccion: 'superintendencia' } },
+  { path: '/superintendencia/procedimientos/lista-asistencia', name: 'lista-asistencia', component: ListaAsistenciaView, meta: { seccion: 'superintendencia' } },
+  { path: '/superintendencia/procedimientos/formato-asistencia', name: 'formato-asistencia', component: FormatoAsistenciaView, meta: { seccion: 'superintendencia' } },
   { path: '/enlaces/:categoria?', name: 'enlaces', component: EnlacesView, meta: { seccion: 'enlaces' } }
 ];
 

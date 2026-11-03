@@ -29,10 +29,11 @@
 
           <!-- En celular, las opciones del menú lateral se muestran aquí -->
           <ul v-if="pestana.seccion === seccionActual && menus[pestana.seccion]" class="submenu">
-            <li v-for="opcion in menus[pestana.seccion].opciones" :key="opcion.texto">
-              <router-link v-if="opcion.ruta" :to="opcion.ruta">› {{ opcion.texto }}</router-link>
-              <span v-else>› {{ opcion.texto }}</span>
-            </li>
+            <MenuOpcion
+              v-for="opcion in menus[pestana.seccion].opciones"
+              :key="opcion.texto"
+              :opcion="opcion"
+            />
           </ul>
         </li>
       </ul>
@@ -43,9 +44,11 @@
 
 <script>
 import { pestanas, menus } from '@/data/menus';
+import MenuOpcion from './MenuOpcion.vue';
 
 export default {
   name: 'NavBar',
+  components: { MenuOpcion },
   data() {
     return {
       pestanas,
@@ -146,8 +149,7 @@ export default {
     background: #f4faf6;
   }
   .submenu li { padding: 8px 5px; font-size: 13px; color: #555; }
-  .submenu a { color: inherit; font-size: 13px; }
-  .submenu a.router-link-active { color: #009a44; font-weight: bold; }
+  /* El estilo de los enlaces y submenús lo pone MenuOpcion.vue */
 
   .btn-login { margin: 15px auto 5px auto; }
 }
