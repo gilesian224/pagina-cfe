@@ -146,3 +146,27 @@ En la pestaña Superintendencia, un menú lateral con la opción **Procedimiento
 | Superintendencia | `#/superintendencia` |
 | Lista de asistencia | `#/superintendencia/procedimientos/lista-asistencia` |
 | Formato de asistencia | `#/superintendencia/procedimientos/formato-asistencia` |
+
+### Logo ZOTPTX en lugar del botón "Iniciar sesión"
+
+**Qué se pidió**
+Quitar el botón "Iniciar sesión" de la barra superior y poner en su lugar el logo de la ZOTPTX.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/assets/logo-zotptx.jpg` | **Nuevo.** Logo ZOTPTX reducido a 240×240 px (19 KB, el original pesaba 156 KB). |
+| `src/components/NavBar.vue` | Se quita el botón y sus estilos; se agrega el logo a la derecha de la barra. |
+
+**Cómo funciona**
+
+1. **La imagen vive en `src/assets/`.** Al escribir `src="@/assets/logo-zotptx.jpg"`, Vue CLI la incluye en la compilación y le agrega un código al nombre (por ejemplo `logo-zotptx.a1b2c3.jpg`), para que el navegador descargue la nueva si algún día se cambia. `@` es un atajo a la carpeta `src`.
+
+2. **Se redujo de tamaño.** En pantalla se ve a 55 px de alto. Una imagen de 240 px se sigue viendo nítida en pantallas de alta resolución, y la página carga más rápido que con la original de 1254 px.
+
+3. **Posición en computadora.** El logo va al final de la `<nav>`, fuera del menú. La barra es un `flex`, así que queda pegado a la derecha: logo CFE, pestañas al centro y logo ZOTPTX a la derecha.
+
+4. **Posición en celular.** Con la propiedad `order` de CSS, el logo se acomoda entre el logo de CFE y el botón ☰, siempre visible (42 px de alto). El menú desplegable (`order: 3`) baja debajo de los tres.
