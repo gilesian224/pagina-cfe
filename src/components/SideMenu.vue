@@ -3,10 +3,7 @@
     <div v-if="menu" class="menu-group">
       <h3 class="menu-title">{{ menu.titulo }}</h3>
       <ul>
-        <li v-for="opcion in menu.opciones" :key="opcion.texto">
-          <router-link v-if="opcion.ruta" :to="opcion.ruta">› {{ opcion.texto }}</router-link>
-          <span v-else>› {{ opcion.texto }}</span>
-        </li>
+        <MenuOpcion v-for="opcion in menu.opciones" :key="opcion.texto" :opcion="opcion" />
       </ul>
     </div>
 
@@ -16,11 +13,12 @@
 
 <script>
 import CalendarioFestivos from './CalendarioFestivos.vue';
+import MenuOpcion from './MenuOpcion.vue';
 import { menus } from '@/data/menus';
 
 export default {
   name: 'SideMenu',
-  components: { CalendarioFestivos },
+  components: { CalendarioFestivos, MenuOpcion },
   computed: {
     // Menú de la sección en la que está el usuario
     menu() {
@@ -44,10 +42,8 @@ export default {
 .menu-group { margin-bottom: 20px; }
 .menu-title { font-size: 16px; color: #333; margin-bottom: 10px; border-bottom: 2px solid #009a44; padding-bottom: 5px; }
 .sidebar ul { list-style: none; padding: 0; margin: 0; }
-.sidebar li { padding: 6px 0; color: #555; font-size: 13px; cursor: pointer; transition: color 0.3s; }
-.sidebar li:hover { color: #009a44; }
-.sidebar li a { color: inherit; text-decoration: none; }
-.sidebar li a.router-link-active { color: #009a44; font-weight: bold; }
+/* El color al pasar el mouse y la opción activa los pone MenuOpcion.vue */
+.sidebar li { padding: 6px 0; color: #555; font-size: 13px; }
 
 /* Móviles y tablets: el menú pasa al botón ☰ y aquí solo queda el calendario */
 @media (max-width: 768px) {

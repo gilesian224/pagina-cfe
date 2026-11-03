@@ -93,3 +93,56 @@ Dar acceso a todas las opciones de la barra lateral izquierda, con solo el títu
 | Directorio ZOTPT | `#/directorio-zotpt` |
 | Directorio ZOTVER | `#/directorio-zotver` |
 | GRTC | `#/grtc` |
+
+---
+
+## 2026-11-03
+
+### Menú de Superintendencia con submenús desplegables
+
+**Qué se pidió**
+En la pestaña Superintendencia, un menú lateral con la opción **Procedimientos**. Al hacer clic, se despliega **Formato de registro**, y al hacer clic en este se despliegan dos páginas: **Lista de asistencia** y **Formato de asistencia**.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/MenuOpcion.vue` | **Nuevo.** Dibuja una opción del menú: enlace, texto o submenú desplegable. |
+| `src/components/SideMenu.vue` | La barra lateral usa `MenuOpcion` para cada opción. |
+| `src/components/NavBar.vue` | El menú ☰ del celular también usa `MenuOpcion`, así los submenús funcionan igual ahí. |
+| `src/data/menus.js` | Conecta la pestaña Superintendencia y agrega su menú con los submenús. |
+| `src/router/index.js` | Tres rutas nuevas. |
+| `src/views/SuperintendenciaView.vue` | **Nuevo.** Página principal de la pestaña (solo título). |
+| `src/views/ListaAsistenciaView.vue` | **Nuevo.** Página "Lista de asistencia" (solo título). |
+| `src/views/FormatoAsistenciaView.vue` | **Nuevo.** Página "Formato de asistencia" (solo título). |
+
+**Cómo funciona**
+
+1. **Los submenús se escriben en `menus.js`.** Una opción puede tener `subopciones`, una lista con la misma forma que `opciones`. Esa lista puede tener otras `subopciones` adentro, sin límite de niveles:
+   ```
+   Procedimientos            ← subopciones
+     └ Formato de registro   ← subopciones
+         ├ Lista de asistencia    → página
+         └ Formato de asistencia  → página
+   ```
+
+2. **`MenuOpcion.vue` decide cómo dibujar cada opción:**
+   - Si tiene `ruta`, es un **enlace** (`<router-link>`) a su página.
+   - Si tiene `subopciones`, es un **botón** con flecha ▸. Al hacer clic, cambia `abierto` entre verdadero y falso, la flecha cambia a ▾ y la lista se muestra u oculta (`v-show="abierto"`).
+   - Si no tiene ninguna de las dos, es **texto simple**.
+
+3. **Es un componente recursivo.** Para dibujar las subopciones, `MenuOpcion` se usa a sí mismo (`<MenuOpcion :opcion="sub" />`). Así, un submenú dentro de otro funciona sin escribir código extra para cada nivel.
+
+4. **Se abre solo cuando estás dentro.** Si la página actual está dentro de un submenú (por ejemplo, entras directo a Lista de asistencia), ese submenú y sus padres aparecen ya abiertos. Lo hace el método `contieneRutaActual`, que revisa todas las subopciones hacia abajo.
+
+5. **Barra lateral y menú ☰ comparten el mismo componente.** Por eso los submenús se ven y funcionan igual en computadora y en celular, y un cambio en `MenuOpcion.vue` afecta a los dos.
+
+**Rutas nuevas**
+
+| Página | Dirección |
+|---|---|
+| Superintendencia | `#/superintendencia` |
+| Lista de asistencia | `#/superintendencia/procedimientos/lista-asistencia` |
+| Formato de asistencia | `#/superintendencia/procedimientos/formato-asistencia` |
