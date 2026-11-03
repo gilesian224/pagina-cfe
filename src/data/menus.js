@@ -15,13 +15,13 @@ export const menus = {
   inicio: {
     titulo: 'Inicio',
     opciones: [
-      { texto: 'Nuestro Centro de Trabajo', ruta: '/ubicacion' },
+      { texto: 'Ubicación', ruta: '/ubicacion' },
       { texto: 'Escenario Tecnológico', ruta: '/escenario-tecnologico' },
       { texto: 'Misión, Visión y Ambición', ruta: '/vision-mision-ambicion' },
       { texto: 'Organigrama', ruta: '/organigrama' },
-      { texto: 'Directorio ZOTGM', ruta: '/directorio-zotgm' },
       { texto: 'Directorio ZOTPT', ruta: '/directorio-zotpt' },
       { texto: 'Directorio ZOTVER', ruta: '/directorio-zotver' },
+      { texto: 'Directorio ZOTGM', ruta: '/directorio-zotgm' },
       { texto: 'GRTC', ruta: '/grtc' }
     ]
   },
