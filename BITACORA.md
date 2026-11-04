@@ -247,9 +247,11 @@ Solo cambia la altura (`height`) de `.logo-zona`. El ancho se ajusta solo (`widt
 
 | Ancho de pantalla | Logo ZOTPTX (antes → ahora) |
 |---|---|
-| Más de 1150 px | 55 → 80 px |
-| 961 a 1150 px | 48 → 68 px |
-| 769 a 960 px | 40 → 56 px |
-| Celular | 42 → 56 px |
+| Más de 1150 px | 55 → 110 px |
+| 961 a 1150 px | 48 → 90 px |
+| 769 a 960 px | 40 → 70 px |
+| Celular | 42 → 64 px |
 
-La imagen mide 240 px, así que a 80 px se sigue viendo nítida incluso en pantallas de alta resolución.
+Para que la barra no crezca de más, el margen de arriba y abajo de la barra bajó de 10 a 6 px. La imagen mide 240 px, así que a 110 px se sigue viendo nítida.
+
+*Se agrandó en dos pasos (primero a 80 px y luego a 110 px) a petición del usuario; la tabla muestra el tamaño final.*
