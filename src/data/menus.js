@@ -7,7 +7,7 @@ export const pestanas = [
   { texto: 'Superintendencia', ruta: '/superintendencia', seccion: 'superintendencia' },
   { texto: 'Operación', ruta: null, seccion: null },
   { texto: 'Programación y Equipos', ruta: null, seccion: null },
-  { texto: 'Enlaces', ruta: '/enlaces', seccion: 'enlaces' }
+  { texto: 'Sitios de interés', ruta: '/enlaces', seccion: 'enlaces' }
 ];
 
 // Opciones del menú lateral para cada sección.
@@ -47,7 +47,7 @@ export const menus = {
     ]
   },
   enlaces: {
-    titulo: 'Enlaces',
+    titulo: 'Sitios de interés',
     // Se genera solo a partir de las categorías de enlaces.js
     opciones: categorias.map(c => ({ texto: c.nombre, ruta: '/enlaces/' + c.id }))
   }

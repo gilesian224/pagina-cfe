@@ -192,3 +192,39 @@ Reordenar los directorios del menú de Inicio (primero ZOTPT, luego ZOTVER y al 
 
 **Nuevo orden del menú de Inicio**
 Ubicación · Escenario Tecnológico · Misión, Visión y Ambición · Organigrama · Directorio ZOTPT · Directorio ZOTVER · Directorio ZOTGM · GRTC
+
+---
+
+## 2026-11-04
+
+### Barra superior: logos parejos, letra más grande y "Sitios de interés"
+
+**Qué se pidió**
+Emparejar el tamaño del logo de CFE con el de ZOTPTX, agrandar el texto de las pestañas para que sea proporcional a los logos y cambiar "Enlaces" por "Sitios de interés".
+
+**Estado:** en revisión (pull request abierto). Depende del PR #5: primero se une #5 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/NavBar.vue` | Logos a la misma altura, pestañas más grandes y ajustes para pantallas medianas. |
+| `src/data/menus.js` | La pestaña y el título del menú lateral dicen "Sitios de interés". |
+| `src/views/EnlacesView.vue` | El título de la página dice "Sitios de interés". |
+
+**Cómo funciona**
+
+1. **Logos a la misma altura.** Los dos usan `height` con el mismo valor y `width: auto`, así cada uno conserva su proporción: el de CFE es más ancho y el de ZOTPTX es cuadrado, pero miden lo mismo de alto.
+
+2. **Tamaños según la pantalla.** Con `@media`, el CSS cambia según el ancho de la ventana:
+
+   | Ancho de pantalla | Logos | Letra de pestañas |
+   |---|---|---|
+   | Más de 1150 px (computadora) | 55 px | 17 px |
+   | 961 a 1150 px (laptop chica) | 48 px | 15 px |
+   | 769 a 960 px (tablet horizontal) | 40 px | 13 px |
+   | 768 px o menos (celular) | 42 px | 15 px, en el menú ☰ |
+
+   Sin esos escalones, en pantallas medianas "Programación y Equipos" y "Sitios de interés" se partían en dos renglones. `white-space: nowrap` evita que una pestaña se divida.
+
+3. **"Sitios de interés" solo cambia el texto.** La dirección sigue siendo `#/enlaces` y los archivos conservan sus nombres (`EnlacesView.vue`, `enlaces.js`). Así no se rompe ningún enlace guardado y no hay que tocar el router.
