@@ -255,3 +255,41 @@ Solo cambia la altura (`height`) de `.logo-zona`. El ancho se ajusta solo (`widt
 Para que la barra no crezca de más, el margen de arriba y abajo de la barra bajó de 10 a 6 px. La imagen mide 240 px, así que a 110 px se sigue viendo nítida.
 
 *Se agrandó en dos pasos (primero a 80 px y luego a 110 px) a petición del usuario; la tabla muestra el tamaño final.*
+
+### Más opciones en el menú de Superintendencia
+
+**Qué se pidió**
+Agregar al menú de Superintendencia: FODA, Compromisos GRTC, Ciclo, Siget y Capacitación, esta última con el submenú Programa de capacitación.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #7: primero se une #7 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/FodaView.vue` | **Nuevo.** Página "FODA" (solo título). |
+| `src/views/CompromisosGrtcView.vue` | **Nuevo.** Página "Compromisos GRTC" (solo título). |
+| `src/views/CicloView.vue` | **Nuevo.** Página "Ciclo" (solo título). |
+| `src/views/SigetView.vue` | **Nuevo.** Página "Siget" (solo título). |
+| `src/views/ProgramaCapacitacionView.vue` | **Nuevo.** Página "Programa de capacitación" (solo título). |
+| `src/router/index.js` | Cinco rutas nuevas. |
+| `src/data/menus.js` | Cinco opciones nuevas en el menú de Superintendencia. |
+
+**Cómo funciona**
+No hizo falta tocar ningún componente. Desde que existe `MenuOpcion.vue`, agregar opciones o submenús es solo cuestión de datos en `menus.js`:
+- **FODA, Compromisos GRTC, Ciclo y Siget** llevan `ruta`, así que son enlaces directos a su página.
+- **Capacitación** lleva `ruta: null` y `subopciones`, así que se dibuja como desplegable (▸) y al hacer clic muestra **Programa de capacitación**.
+
+**Menú de Superintendencia completo**
+```
+▸ Procedimientos
+    ▸ Formato de registro
+        › Lista de asistencia      #/superintendencia/procedimientos/lista-asistencia
+        › Formato de asistencia    #/superintendencia/procedimientos/formato-asistencia
+› FODA                             #/superintendencia/foda
+› Compromisos GRTC                 #/superintendencia/compromisos-grtc
+› Ciclo                            #/superintendencia/ciclo
+› Siget                            #/superintendencia/siget
+▸ Capacitación
+    › Programa de capacitación     #/superintendencia/capacitacion/programa
+```

@@ -43,6 +43,17 @@ export const menus = {
             ]
           }
         ]
+      },
+      { texto: 'FODA', ruta: '/superintendencia/foda' },
+      { texto: 'Compromisos GRTC', ruta: '/superintendencia/compromisos-grtc' },
+      { texto: 'Ciclo', ruta: '/superintendencia/ciclo' },
+      { texto: 'Siget', ruta: '/superintendencia/siget' },
+      {
+        texto: 'Capacitación',
+        ruta: null,
+        subopciones: [
+          { texto: 'Programa de capacitación', ruta: '/superintendencia/capacitacion/programa' }
+        ]
       }
     ]
   },
