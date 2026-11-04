@@ -49,8 +49,8 @@ export const menus = {
       },
       { texto: 'FODA', ruta: '/superintendencia/foda' },
       { texto: 'Compromisos GRTC', ruta: '/superintendencia/compromisos-grtc' },
-      { texto: 'SICLO', ruta: '/superintendencia/ciclo' },
-      { texto: 'SIGET', ruta: '/superintendencia/siget' },
+      { texto: 'SICLO', url: 'http://siclo.cfemex.com/Intranet/Index.aspx' },
+      { texto: 'SIGET', url: 'http://10.21.1.138/indices/index/login.aspx' },
       {
         texto: 'Capacitación',
         ruta: null,

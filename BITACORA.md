@@ -335,7 +335,7 @@ Darle a la pestaña Operación su menú lateral con FODA y CENACE. CENACE lleva 
 **Qué se pidió**
 Cambiar "Ciclo" y "Siget" por "SICLO" y "SIGET", y que al hacer clic lleven a otra página web.
 
-**Estado:** en revisión (pull request abierto). Faltan las direcciones de SICLO y SIGET; mientras tanto siguen abriendo su página interna.
+**Estado:** en revisión (pull request abierto). SICLO y SIGET ya abren su sistema; falta la dirección de Compromisos GRTC.
 
 **Qué pasó antes**
 El cambio de nombres se hizo en la laptop y se subió a la rama del PR #8 **después** de que ese PR ya se había unido, así que nunca llegó a `main`. Ese commit además regresaba por accidente la pestaña "Sitios de interés" a "Enlaces" (venía de una versión vieja de `menus.js`). Este PR aplica solo los nombres nuevos, sobre `main`.
@@ -361,3 +361,13 @@ Se usa `v-if` / `v-else-if` / `v-else` para que solo se dibuje una de las cuatro
 ```js
 { texto: 'SIGET', url: 'https://direccion-de-siget' },
 ```
+
+**Enlaces conectados**
+
+| Opción | Dirección | Notas |
+|---|---|---|
+| SICLO | `http://siclo.cfemex.com/Intranet/Index.aspx` | 🔒 Solo red CFE |
+| SIGET | `http://10.21.1.138/indices/index/login.aspx` | 🔒 Solo red CFE |
+| Compromisos GRTC | *pendiente* | |
+
+Las páginas internas `CicloView.vue` y `SigetView.vue`, y sus rutas, siguen en el proyecto pero ya no se usan desde el menú. Se pueden borrar más adelante (primero el `import` y la ruta en `router/index.js`, después el archivo).
