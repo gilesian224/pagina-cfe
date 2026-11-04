@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h2 class="section-title">Enlaces</h2>
+    <h2 class="section-title">Sitios de interés</h2>
 
     <!-- Un bloque por cada categoría visible -->
     <div v-for="categoria in categoriasVisibles" :key="categoria.id" class="categoria">

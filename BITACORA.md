@@ -170,3 +170,61 @@ Quitar el botón "Iniciar sesión" de la barra superior y poner en su lugar el l
 3. **Posición en computadora.** El logo va al final de la `<nav>`, fuera del menú. La barra es un `flex`, así que queda pegado a la derecha: logo CFE, pestañas al centro y logo ZOTPTX a la derecha.
 
 4. **Posición en celular.** Con la propiedad `order` de CSS, el logo se acomoda entre el logo de CFE y el botón ☰, siempre visible (42 px de alto). El menú desplegable (`order: 3`) baja debajo de los tres.
+
+### Orden de los directorios y "Ubicación"
+
+**Qué se pidió**
+Reordenar los directorios del menú de Inicio (primero ZOTPT, luego ZOTVER y al final ZOTGM) y cambiar "Nuestro Centro de Trabajo" por "Ubicación".
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | Nuevo orden de los directorios; la opción "Nuestro Centro de Trabajo" ahora dice "Ubicación". |
+| `src/views/UbicacionView.vue` | El título de la página también dice "Ubicación", para que coincida con el menú. |
+
+**Cómo funciona**
+
+1. **El orden del menú es el orden de las líneas** en `opciones` de `menus.js`. Para reordenar, solo se mueven las líneas; las rutas y las páginas no cambian. En VS Code se hace con `Alt + ↑ / ↓`.
+2. **El texto del menú y el título de la página son independientes.** `texto` en `menus.js` es lo que se ve en la barra lateral, y el `<h2>` de `UbicacionView.vue` es el título dentro de la página. Se cambiaron los dos. La dirección sigue siendo `#/ubicacion`, así que los enlaces existentes no se rompen.
+
+**Nuevo orden del menú de Inicio**
+Ubicación · Escenario Tecnológico · Misión, Visión y Ambición · Organigrama · Directorio ZOTPT · Directorio ZOTVER · Directorio ZOTGM · GRTC
+
+---
+
+## 2026-11-04
+
+### Barra superior: logos parejos, letra más grande y "Sitios de interés"
+
+**Qué se pidió**
+Emparejar el tamaño del logo de CFE con el de ZOTPTX, agrandar el texto de las pestañas para que sea proporcional a los logos y cambiar "Enlaces" por "Sitios de interés".
+
+**Estado:** en revisión (pull request abierto). Depende del PR #5: primero se une #5 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/NavBar.vue` | Logos a la misma altura, pestañas más grandes y ajustes para pantallas medianas. |
+| `src/data/menus.js` | La pestaña y el título del menú lateral dicen "Sitios de interés". |
+| `src/views/EnlacesView.vue` | El título de la página dice "Sitios de interés". |
+
+**Cómo funciona**
+
+1. **Logos a la misma altura.** Los dos usan `height` con el mismo valor y `width: auto`, así cada uno conserva su proporción: el de CFE es más ancho y el de ZOTPTX es cuadrado, pero miden lo mismo de alto.
+
+2. **Tamaños según la pantalla.** Con `@media`, el CSS cambia según el ancho de la ventana:
+
+   | Ancho de pantalla | Logos | Letra de pestañas |
+   |---|---|---|
+   | Más de 1150 px (computadora) | 55 px | 17 px |
+   | 961 a 1150 px (laptop chica) | 48 px | 15 px |
+   | 769 a 960 px (tablet horizontal) | 40 px | 13 px |
+   | 768 px o menos (celular) | 42 px | 15 px, en el menú ☰ |
+
+   Sin esos escalones, en pantallas medianas "Programación y Equipos" y "Sitios de interés" se partían en dos renglones. `white-space: nowrap` evita que una pestaña se divida.
+
+3. **"Sitios de interés" solo cambia el texto.** La dirección sigue siendo `#/enlaces` y los archivos conservan sus nombres (`EnlacesView.vue`, `enlaces.js`). Así no se rompe ningún enlace guardado y no hay que tocar el router.

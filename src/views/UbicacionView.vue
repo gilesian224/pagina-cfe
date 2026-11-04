@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h2 class="section-title">Nuestro Centro de Trabajo</h2>
+    <h2 class="section-title">Ubicación</h2>
 
     <div class="ubicacion-card">
       <div class="ubicacion-titulo">Ubicación ZOTPT</div>

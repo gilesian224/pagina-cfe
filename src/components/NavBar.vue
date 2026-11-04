@@ -83,7 +83,8 @@ export default {
   z-index: 10;
 }
 .nav-left { display: flex; align-items: center; gap: 10px; }
-.logo-cfe { height: 40px; }
+/* Los dos logos tienen la misma altura */
+.logo-cfe { height: 55px; width: auto; }
 
 .nav-menu {
   display: flex;
@@ -91,14 +92,32 @@ export default {
   flex: 1;
   margin-left: 40px;
 }
-.nav-links { list-style: none; display: flex; gap: 25px; margin: 0 auto; padding: 0; }
-.nav-links a { text-decoration: none; color: #555; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+.nav-links { list-style: none; display: flex; gap: 30px; margin: 0 auto; padding: 0; }
+.nav-links a { text-decoration: none; color: #555; font-size: 17px; font-weight: 500; transition: color 0.3s; white-space: nowrap; }
 .nav-links a:hover { color: #009a44; }
 .nav-links a.activo { color: #009a44; font-weight: bold; }
 .logo-zona {
   height: 55px;
   width: auto;
   margin-left: 20px;
+}
+
+/* Pantallas medianas (laptops chicas, tablets en horizontal):
+   letra y espacios un poco menores para que todo quepa en una línea */
+@media (max-width: 1150px) and (min-width: 769px) {
+  .navbar { padding: 10px 20px; }
+  .nav-menu { margin-left: 20px; }
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 15px; }
+  .logo-cfe,
+  .logo-zona { height: 48px; }
+}
+@media (max-width: 960px) and (min-width: 769px) {
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 13px; }
+  .logo-cfe,
+  .logo-zona { height: 40px; }
+  .logo-zona { margin-left: 12px; }
 }
 
 /* En escritorio el submenú y el botón ☰ no se muestran */
@@ -155,6 +174,7 @@ export default {
 
   /* En celular: logo CFE a la izquierda, luego el logo ZOTPTX y el botón ☰ a la derecha;
      el menú desplegable baja debajo de los tres */
+  .logo-cfe { height: 42px; }
   .logo-zona {
     order: 1;
     height: 42px;
