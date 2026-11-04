@@ -97,7 +97,7 @@ export default {
 .nav-links a:hover { color: #009a44; }
 .nav-links a.activo { color: #009a44; font-weight: bold; }
 .logo-zona {
-  height: 55px;
+  height: 80px;
   width: auto;
   margin-left: 20px;
 }
@@ -109,15 +109,14 @@ export default {
   .nav-menu { margin-left: 20px; }
   .nav-links { gap: 18px; }
   .nav-links a { font-size: 15px; }
-  .logo-cfe,
-  .logo-zona { height: 48px; }
+  .logo-cfe { height: 48px; }
+  .logo-zona { height: 68px; }
 }
 @media (max-width: 960px) and (min-width: 769px) {
   .nav-links { gap: 12px; }
   .nav-links a { font-size: 13px; }
-  .logo-cfe,
-  .logo-zona { height: 40px; }
-  .logo-zona { margin-left: 12px; }
+  .logo-cfe { height: 40px; }
+  .logo-zona { height: 56px; margin-left: 12px; }
 }
 
 /* En escritorio el submenú y el botón ☰ no se muestran */
@@ -177,7 +176,7 @@ export default {
   .logo-cfe { height: 42px; }
   .logo-zona {
     order: 1;
-    height: 42px;
+    height: 56px;
     margin: 0 12px 0 auto;
   }
   .btn-menu { order: 2; }

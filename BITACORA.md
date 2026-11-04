@@ -228,3 +228,28 @@ Emparejar el tamaño del logo de CFE con el de ZOTPTX, agrandar el texto de las 
    Sin esos escalones, en pantallas medianas "Programación y Equipos" y "Sitios de interés" se partían en dos renglones. `white-space: nowrap` evita que una pestaña se divida.
 
 3. **"Sitios de interés" solo cambia el texto.** La dirección sigue siendo `#/enlaces` y los archivos conservan sus nombres (`EnlacesView.vue`, `enlaces.js`). Así no se rompe ningún enlace guardado y no hay que tocar el router.
+
+### Logo ZOTPTX más grande
+
+**Qué se pidió**
+Que el logo de ZOTPTX se vea más grande en la barra superior.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/NavBar.vue` | Más altura para `.logo-zona` en cada tamaño de pantalla. |
+
+**Cómo funciona**
+Solo cambia la altura (`height`) de `.logo-zona`. El ancho se ajusta solo (`width: auto`) porque el logo es cuadrado. El logo de CFE y el texto de las pestañas no cambian. La barra se hace un poco más alta para dar espacio al logo.
+
+| Ancho de pantalla | Logo ZOTPTX (antes → ahora) |
+|---|---|
+| Más de 1150 px | 55 → 80 px |
+| 961 a 1150 px | 48 → 68 px |
+| 769 a 960 px | 40 → 56 px |
+| Celular | 42 → 56 px |
+
+La imagen mide 240 px, así que a 80 px se sigue viendo nítida incluso en pantallas de alta resolución.
