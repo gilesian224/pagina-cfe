@@ -7,7 +7,7 @@ export const pestanas = [
   { texto: 'Superintendencia', ruta: '/superintendencia', seccion: 'superintendencia' },
   { texto: 'Operación', ruta: null, seccion: null },
   { texto: 'Programación y Equipos', ruta: null, seccion: null },
-  { texto: 'Sitios de interés', ruta: '/enlaces', seccion: 'enlaces' }
+  { texto: 'Enlaces', ruta: '/enlaces', seccion: 'enlaces' }
 ];
 
 // Opciones del menú lateral para cada sección.
@@ -46,8 +46,8 @@ export const menus = {
       },
       { texto: 'FODA', ruta: '/superintendencia/foda' },
       { texto: 'Compromisos GRTC', ruta: '/superintendencia/compromisos-grtc' },
-      { texto: 'Ciclo', ruta: '/superintendencia/ciclo' },
-      { texto: 'Siget', ruta: '/superintendencia/siget' },
+      { texto: 'SICLO', ruta: '/superintendencia/ciclo' },
+      { texto: 'SIGET', ruta: '/superintendencia/siget' },
       {
         texto: 'Capacitación',
         ruta: null,
