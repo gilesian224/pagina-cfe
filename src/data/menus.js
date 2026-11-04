@@ -5,7 +5,7 @@ import { categorias } from './enlaces';
 export const pestanas = [
   { texto: 'Inicio', ruta: '/', seccion: 'inicio' },
   { texto: 'Superintendencia', ruta: '/superintendencia', seccion: 'superintendencia' },
-  { texto: 'Operación', ruta: null, seccion: null },
+  { texto: 'Operación', ruta: '/operacion', seccion: 'operacion' },
   { texto: 'Programación y Equipos', ruta: null, seccion: null },
   { texto: 'Sitios de interés', ruta: '/enlaces', seccion: 'enlaces' }
 ];
@@ -53,6 +53,22 @@ export const menus = {
         ruta: null,
         subopciones: [
           { texto: 'Programa de capacitación', ruta: '/superintendencia/capacitacion/programa' }
+        ]
+      }
+    ]
+  },
+  operacion: {
+    titulo: 'Operación',
+    opciones: [
+      { texto: 'FODA', ruta: '/operacion/foda' },
+      {
+        texto: 'CENACE',
+        ruta: null,
+        subopciones: [
+          { texto: 'Consulta de solicitudes y licencias', ruta: '/operacion/cenace/solicitudes-licencias' },
+          { texto: 'Sistema web de salidas forzadas', ruta: '/operacion/cenace/salidas-forzadas' },
+          { texto: 'Calendario SIASAM', ruta: '/operacion/cenace/calendario-siasam' },
+          { texto: 'Formato de carga masiva', ruta: '/operacion/cenace/formato-carga-masiva' }
         ]
       }
     ]

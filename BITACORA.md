@@ -293,3 +293,39 @@ No hizo falta tocar ningún componente. Desde que existe `MenuOpcion.vue`, agreg
 ▸ Capacitación
     › Programa de capacitación     #/superintendencia/capacitacion/programa
 ```
+
+### Menú de Operación
+
+**Qué se pidió**
+Darle a la pestaña Operación su menú lateral con FODA y CENACE. CENACE lleva cuatro submenús: Consulta de solicitudes y licencias, Sistema web de salidas forzadas, Calendario SIASAM y Formato de carga masiva.
+
+**Estado:** en revisión (pull request abierto). Depende de los PRs #7 y #8: se unen en orden #7, #8 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/OperacionView.vue` | **Nuevo.** Página principal de la pestaña (solo título). |
+| `src/views/FodaOperacionView.vue` | **Nuevo.** Página "FODA" de Operación (solo título). |
+| `src/views/SolicitudesLicenciasView.vue` | **Nuevo.** "Consulta de solicitudes y licencias" (solo título). |
+| `src/views/SalidasForzadasView.vue` | **Nuevo.** "Sistema web de salidas forzadas" (solo título). |
+| `src/views/CalendarioSiasamView.vue` | **Nuevo.** "Calendario SIASAM" (solo título). |
+| `src/views/CargaMasivaView.vue` | **Nuevo.** "Formato de carga masiva" (solo título). |
+| `src/router/index.js` | Seis rutas nuevas con `seccion: 'operacion'`. |
+| `src/data/menus.js` | La pestaña Operación ya lleva a `/operacion`, y se agrega el bloque `operacion` del menú. |
+
+**Cómo funciona**
+
+1. **Pestaña conectada.** En `pestanas`, Operación pasó de `ruta: null, seccion: null` a `ruta: '/operacion', seccion: 'operacion'`. Al hacer clic, la pestaña se marca en verde y la barra lateral muestra el bloque `operacion`.
+2. **Dos FODA distintos.** Superintendencia y Operación tienen cada uno su propio FODA. Para que no se confundan, el de Operación usa otro archivo (`FodaOperacionView.vue`), otra dirección (`/operacion/foda`) y otro nombre de ruta (`foda-operacion`). Cada `name` del router debe ser único.
+3. **CENACE es desplegable.** Lleva `ruta: null` y `subopciones`, igual que Procedimientos y Capacitación. `MenuOpcion.vue` lo dibuja con ▸ y lo abre al hacer clic.
+
+**Menú de Operación**
+```
+› FODA                                     #/operacion/foda
+▸ CENACE
+    › Consulta de solicitudes y licencias  #/operacion/cenace/solicitudes-licencias
+    › Sistema web de salidas forzadas      #/operacion/cenace/salidas-forzadas
+    › Calendario SIASAM                    #/operacion/cenace/calendario-siasam
+    › Formato de carga masiva              #/operacion/cenace/formato-carga-masiva
+```
