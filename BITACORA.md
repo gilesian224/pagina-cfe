@@ -228,3 +228,104 @@ Emparejar el tamaño del logo de CFE con el de ZOTPTX, agrandar el texto de las 
    Sin esos escalones, en pantallas medianas "Programación y Equipos" y "Sitios de interés" se partían en dos renglones. `white-space: nowrap` evita que una pestaña se divida.
 
 3. **"Sitios de interés" solo cambia el texto.** La dirección sigue siendo `#/enlaces` y los archivos conservan sus nombres (`EnlacesView.vue`, `enlaces.js`). Así no se rompe ningún enlace guardado y no hay que tocar el router.
+
+### Logo ZOTPTX más grande
+
+**Qué se pidió**
+Que el logo de ZOTPTX se vea más grande en la barra superior.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/NavBar.vue` | Más altura para `.logo-zona` en cada tamaño de pantalla. |
+
+**Cómo funciona**
+Solo cambia la altura (`height`) de `.logo-zona`. El ancho se ajusta solo (`width: auto`) porque el logo es cuadrado. El logo de CFE y el texto de las pestañas no cambian. La barra se hace un poco más alta para dar espacio al logo.
+
+| Ancho de pantalla | Logo ZOTPTX (antes → ahora) |
+|---|---|
+| Más de 1150 px | 55 → 110 px |
+| 961 a 1150 px | 48 → 90 px |
+| 769 a 960 px | 40 → 70 px |
+| Celular | 42 → 64 px |
+
+Para que la barra no crezca de más, el margen de arriba y abajo de la barra bajó de 10 a 6 px. La imagen mide 240 px, así que a 110 px se sigue viendo nítida.
+
+*Se agrandó en dos pasos (primero a 80 px y luego a 110 px) a petición del usuario; la tabla muestra el tamaño final.*
+
+### Más opciones en el menú de Superintendencia
+
+**Qué se pidió**
+Agregar al menú de Superintendencia: FODA, Compromisos GRTC, Ciclo, Siget y Capacitación, esta última con el submenú Programa de capacitación.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #7: primero se une #7 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/FodaView.vue` | **Nuevo.** Página "FODA" (solo título). |
+| `src/views/CompromisosGrtcView.vue` | **Nuevo.** Página "Compromisos GRTC" (solo título). |
+| `src/views/CicloView.vue` | **Nuevo.** Página "Ciclo" (solo título). |
+| `src/views/SigetView.vue` | **Nuevo.** Página "Siget" (solo título). |
+| `src/views/ProgramaCapacitacionView.vue` | **Nuevo.** Página "Programa de capacitación" (solo título). |
+| `src/router/index.js` | Cinco rutas nuevas. |
+| `src/data/menus.js` | Cinco opciones nuevas en el menú de Superintendencia. |
+
+**Cómo funciona**
+No hizo falta tocar ningún componente. Desde que existe `MenuOpcion.vue`, agregar opciones o submenús es solo cuestión de datos en `menus.js`:
+- **FODA, Compromisos GRTC, Ciclo y Siget** llevan `ruta`, así que son enlaces directos a su página.
+- **Capacitación** lleva `ruta: null` y `subopciones`, así que se dibuja como desplegable (▸) y al hacer clic muestra **Programa de capacitación**.
+
+**Menú de Superintendencia completo**
+```
+▸ Procedimientos
+    ▸ Formato de registro
+        › Lista de asistencia      #/superintendencia/procedimientos/lista-asistencia
+        › Formato de asistencia    #/superintendencia/procedimientos/formato-asistencia
+› FODA                             #/superintendencia/foda
+› Compromisos GRTC                 #/superintendencia/compromisos-grtc
+› Ciclo                            #/superintendencia/ciclo
+› Siget                            #/superintendencia/siget
+▸ Capacitación
+    › Programa de capacitación     #/superintendencia/capacitacion/programa
+```
+
+### Menú de Operación
+
+**Qué se pidió**
+Darle a la pestaña Operación su menú lateral con FODA y CENACE. CENACE lleva cuatro submenús: Consulta de solicitudes y licencias, Sistema web de salidas forzadas, Calendario SIASAM y Formato de carga masiva.
+
+**Estado:** en revisión (pull request abierto). Depende de los PRs #7 y #8: se unen en orden #7, #8 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/OperacionView.vue` | **Nuevo.** Página principal de la pestaña (solo título). |
+| `src/views/FodaOperacionView.vue` | **Nuevo.** Página "FODA" de Operación (solo título). |
+| `src/views/SolicitudesLicenciasView.vue` | **Nuevo.** "Consulta de solicitudes y licencias" (solo título). |
+| `src/views/SalidasForzadasView.vue` | **Nuevo.** "Sistema web de salidas forzadas" (solo título). |
+| `src/views/CalendarioSiasamView.vue` | **Nuevo.** "Calendario SIASAM" (solo título). |
+| `src/views/CargaMasivaView.vue` | **Nuevo.** "Formato de carga masiva" (solo título). |
+| `src/router/index.js` | Seis rutas nuevas con `seccion: 'operacion'`. |
+| `src/data/menus.js` | La pestaña Operación ya lleva a `/operacion`, y se agrega el bloque `operacion` del menú. |
+
+**Cómo funciona**
+
+1. **Pestaña conectada.** En `pestanas`, Operación pasó de `ruta: null, seccion: null` a `ruta: '/operacion', seccion: 'operacion'`. Al hacer clic, la pestaña se marca en verde y la barra lateral muestra el bloque `operacion`.
+2. **Dos FODA distintos.** Superintendencia y Operación tienen cada uno su propio FODA. Para que no se confundan, el de Operación usa otro archivo (`FodaOperacionView.vue`), otra dirección (`/operacion/foda`) y otro nombre de ruta (`foda-operacion`). Cada `name` del router debe ser único.
+3. **CENACE es desplegable.** Lleva `ruta: null` y `subopciones`, igual que Procedimientos y Capacitación. `MenuOpcion.vue` lo dibuja con ▸ y lo abre al hacer clic.
+
+**Menú de Operación**
+```
+› FODA                                     #/operacion/foda
+▸ CENACE
+    › Consulta de solicitudes y licencias  #/operacion/cenace/solicitudes-licencias
+    › Sistema web de salidas forzadas      #/operacion/cenace/salidas-forzadas
+    › Calendario SIASAM                    #/operacion/cenace/calendario-siasam
+    › Formato de carga masiva              #/operacion/cenace/formato-carga-masiva
+```
