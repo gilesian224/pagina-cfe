@@ -10,7 +10,10 @@ export const pestanas = [
   { texto: 'Sitios de interés', ruta: '/enlaces', seccion: 'enlaces' }
 ];
 
-// Opciones del menú lateral para cada sección.
+// Opciones del menú lateral para cada sección. Cada opción puede llevar:
+//   ruta: '/...'          → abre una página de este sitio
+//   url: 'https://...'    → abre otro sitio en una pestaña nueva (muestra ↗)
+//   subopciones: [ ... ]  → se despliega al hacer clic
 export const menus = {
   inicio: {
     titulo: 'Inicio',
@@ -46,8 +49,8 @@ export const menus = {
       },
       { texto: 'FODA', ruta: '/superintendencia/foda' },
       { texto: 'Compromisos GRTC', ruta: '/superintendencia/compromisos-grtc' },
-      { texto: 'Ciclo', ruta: '/superintendencia/ciclo' },
-      { texto: 'Siget', ruta: '/superintendencia/siget' },
+      { texto: 'SICLO', ruta: '/superintendencia/ciclo' },
+      { texto: 'SIGET', ruta: '/superintendencia/siget' },
       {
         texto: 'Capacitación',
         ruta: null,

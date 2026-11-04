@@ -1,9 +1,17 @@
 <template>
   <li>
-    <!-- 1. Opción con página: es un enlace -->
-    <router-link v-if="opcion.ruta" :to="opcion.ruta">› {{ opcion.texto }}</router-link>
+    <!-- 1. Opción con dirección externa ("url"): abre otro sitio en una pestaña nueva -->
+    <a
+      v-if="opcion.url"
+      :href="opcion.url"
+      target="_blank"
+      rel="noopener noreferrer"
+    >› {{ opcion.texto }} <span class="icono-externo">↗</span></a>
 
-    <!-- 2. Opción con submenú: un botón que abre y cierra su lista -->
+    <!-- 2. Opción con página interna ("ruta"): es un enlace del router -->
+    <router-link v-else-if="opcion.ruta" :to="opcion.ruta">› {{ opcion.texto }}</router-link>
+
+    <!-- 3. Opción con submenú: un botón que abre y cierra su lista -->
     <template v-else-if="opcion.subopciones">
       <button
         type="button"
@@ -26,7 +34,7 @@
       </ul>
     </template>
 
-    <!-- 3. Opción sin página ni submenú: solo texto -->
+    <!-- 4. Opción sin página ni submenú: solo texto -->
     <span v-else>› {{ opcion.texto }}</span>
   </li>
 </template>
@@ -35,7 +43,7 @@
 export default {
   name: 'MenuOpcion',
   props: {
-    // Un elemento de menus.js: { texto, ruta, subopciones? }
+    // Un elemento de menus.js: { texto, ruta?, url?, subopciones? }
     opcion: { type: Object, required: true }
   },
   data() {
@@ -78,6 +86,7 @@ a,
 a:hover,
 .desplegable:hover { color: #009a44; }
 a.router-link-active { color: #009a44; font-weight: bold; }
+.icono-externo { font-size: 0.85em; color: #009a44; }
 
 .desplegable {
   background: none;
