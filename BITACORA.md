@@ -371,3 +371,46 @@ Se usa `v-if` / `v-else-if` / `v-else` para que solo se dibuje una de las cuatro
 | Compromisos GRTC | *pendiente* | |
 
 Las páginas internas `CicloView.vue` y `SigetView.vue`, y sus rutas, siguen en el proyecto pero ya no se usan desde el menú. Se pueden borrar más adelante (primero el `import` y la ruta en `router/index.js`, después el archivo).
+
+---
+
+## 2026-11-05
+
+### Contenido de "Escenario Tecnológico"
+
+**Qué se pidió**
+Llenar la página Escenario Tecnológico con la información de la presentación "Escenario Tecnológico ZOT Puebla - Tlaxcala" (PDF de 5 láminas).
+
+**Estado:** en revisión (pull request abierto). Depende del PR #10: primero se une #10 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/escenarioTecnologico.js` | **Nuevo.** Las cifras de la presentación, organizadas en 4 bloques. |
+| `src/views/EscenarioTecnologicoView.vue` | La página ahora muestra un resumen y una tabla por bloque. |
+
+**Datos (tal cual la presentación)**
+
+| Bloque | Desglose | Total |
+|---|---|---|
+| Subestaciones | RST 99 · RNT 16 · RT 115 | 230 |
+| Líneas de transmisión | 400 kV: 6 líneas, 139 km · 230 kV: 9, 272 km · 115 kV: 118, 2,238 km · 69 kV: 2, 77 km | 135 líneas, 2,726 km |
+| Interruptores instalados | 400 kV 63 · 230 kV 57 · 115 kV 382 · 69 kV 2 | 504 |
+| Capacidad instalada (MVA) | 400 kV 3,261 · 230 kV 1,198 · 115 kV 3,087 · 69 kV 26 | 7,572 |
+
+Los totales no venían en la presentación: la página los calcula sumando las filas.
+
+**Cómo funciona**
+
+1. **Los datos están separados del diseño**, igual que en Sitios de interés. `escenarioTecnologico.js` tiene una lista `bloques`; cada bloque tiene `titulo`, `icono`, `columnas` (encabezados de los números) y `filas` (una por red o nivel de tensión, con sus `valores` en el mismo orden que `columnas`). Para actualizar una cifra se cambia solo el número; los totales y las barras se recalculan solos.
+
+2. **Resumen arriba.** Un recuadro por bloque con su total (`totalDeColumna`), para leer la zona de un vistazo. En Líneas se muestran los km y, debajo, el número de líneas.
+
+3. **Una tabla por bloque.** Es una `<table>` real (con `<thead>`, `<tbody>` y `<tfoot>` para el total), así que también se lee bien con lectores de pantalla y se puede copiar a Excel.
+
+4. **Barras de proporción.** Cada fila tiene una barra verde que compara su valor con el más alto del bloque: `porcentaje()` divide el valor entre el máximo y lo convierte en el ancho de la barra (el máximo ocupa el 100 %). Así se ve de inmediato, por ejemplo, que 115 kV concentra la mayoría de las líneas y los interruptores. En Líneas, la barra representa los **kilómetros** (lo indica `barra: 1`). Al pasar el mouse sobre una barra aparece su valor.
+
+5. **Formato de números.** `formato()` usa `toLocaleString('es-MX')`, que convierte `2238` en `2,238`.
+
+6. **Se adapta a la pantalla.** El resumen y las tablas usan `grid` con `auto-fit`: en computadora quedan dos tablas por fila y en celular una debajo de otra.
