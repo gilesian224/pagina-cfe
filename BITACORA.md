@@ -329,3 +329,45 @@ Darle a la pestaña Operación su menú lateral con FODA y CENACE. CENACE lleva 
     › Calendario SIASAM                    #/operacion/cenace/calendario-siasam
     › Formato de carga masiva              #/operacion/cenace/formato-carga-masiva
 ```
+
+### SICLO y SIGET, y enlaces externos en el menú
+
+**Qué se pidió**
+Cambiar "Ciclo" y "Siget" por "SICLO" y "SIGET", y que al hacer clic lleven a otra página web.
+
+**Estado:** en revisión (pull request abierto). SICLO y SIGET ya abren su sistema; falta la dirección de Compromisos GRTC.
+
+**Qué pasó antes**
+El cambio de nombres se hizo en la laptop y se subió a la rama del PR #8 **después** de que ese PR ya se había unido, así que nunca llegó a `main`. Ese commit además regresaba por accidente la pestaña "Sitios de interés" a "Enlaces" (venía de una versión vieja de `menus.js`). Este PR aplica solo los nombres nuevos, sobre `main`.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/MenuOpcion.vue` | Nuevo tipo de opción: enlace externo con `url`. |
+| `src/data/menus.js` | "SICLO" y "SIGET", más un comentario que explica `ruta`, `url` y `subopciones`. |
+| `src/views/CicloView.vue` y `src/views/SigetView.vue` | Títulos "SICLO" y "SIGET". |
+
+**Cómo funciona**
+`MenuOpcion.vue` revisa cada opción en este orden:
+1. ¿Tiene **`url`**? Entonces dibuja un enlace normal `<a href>` que abre el otro sitio en una pestaña nueva (`target="_blank"`), con una flechita **↗** para avisar que sale de la página.
+2. ¿Tiene **`ruta`**? Entonces es un `<router-link>` a una página de este sitio.
+3. ¿Tiene **`subopciones`**? Entonces es desplegable.
+4. Si no, es texto simple.
+
+Se usa `v-if` / `v-else-if` / `v-else` para que solo se dibuje una de las cuatro formas. `<router-link>` solo sirve para páginas internas; para otro sitio se necesita `<a href>`.
+
+**Para poner un enlace externo**, en `menus.js` se cambia `ruta` por `url`:
+```js
+{ texto: 'SIGET', url: 'https://direccion-de-siget' },
+```
+
+**Enlaces conectados**
+
+| Opción | Dirección | Notas |
+|---|---|---|
+| SICLO | `http://siclo.cfemex.com/Intranet/Index.aspx` | 🔒 Solo red CFE |
+| SIGET | `http://10.21.1.138/indices/index/login.aspx` | 🔒 Solo red CFE |
+| Compromisos GRTC | *pendiente* | |
+
+Las páginas internas `CicloView.vue` y `SigetView.vue`, y sus rutas, siguen en el proyecto pero ya no se usan desde el menú. Se pueden borrar más adelante (primero el `import` y la ruta en `router/index.js`, después el archivo).
