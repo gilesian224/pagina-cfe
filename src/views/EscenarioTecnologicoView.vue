@@ -1,95 +1,109 @@
 <template>
   <section class="section">
     <h2 class="section-title">Escenario Tecnológico</h2>
-    <p class="subtitulo">
-      Red Nacional de Transmisión · Zona de Operación de Transmisión Puebla – Tlaxcala
+
+    <p class="et-intro">
+      Infraestructura de la Zona de Operación de Transmisión Puebla – Tlaxcala,
+      perteneciente a la Red Nacional de Transmisión.
     </p>
 
-    <!-- 1. Resumen: un total por bloque -->
-    <div class="resumen">
-      <div v-for="bloque in bloques" :key="bloque.id" class="resumen-tile">
-        <span class="resumen-icono" aria-hidden="true">{{ bloque.icono }}</span>
-        <span class="resumen-titulo">{{ bloque.titulo }}</span>
-        <span class="resumen-valor">
-          {{ formato(totalDeColumna(bloque, bloque.barra)) }}
-          <small>{{ bloque.unidad }}</small>
-        </span>
-        <!-- Líneas: además de los km, el total de líneas -->
-        <span v-if="bloque.id === 'lineas'" class="resumen-extra">
-          en {{ formato(totalDeColumna(bloque, 0)) }} líneas
-        </span>
-      </div>
+    <!-- Una tabla por cada tema -->
+    <div v-for="(tabla, i) in tablas" :key="tabla.titulo" class="et-bloque">
+      <h3 class="et-titulo">{{ i + 1 }}. {{ tabla.titulo }}</h3>
+
+      <table class="et-tabla">
+        <thead>
+          <tr>
+            <th>{{ tabla.encabezado }}</th>
+            <th v-for="columna in tabla.columnas" :key="columna" class="num">{{ columna }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="fila in tabla.filas" :key="fila.nombre">
+            <td>{{ fila.nombre }}</td>
+            <td v-for="(valor, j) in fila.valores" :key="j" class="num">{{ formato(valor) }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total</td>
+            <td v-for="(columna, j) in tabla.columnas" :key="columna" class="num">
+              {{ formato(total(tabla, j)) }}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
 
-    <!-- 2. Detalle: una tabla por bloque -->
-    <div class="bloques">
-      <article v-for="bloque in bloques" :key="bloque.id" class="bloque">
-        <h3 class="bloque-titulo">
-          <span aria-hidden="true">{{ bloque.icono }}</span> {{ bloque.titulo }}
-        </h3>
-
-        <table class="tabla">
-          <thead>
-            <tr>
-              <th scope="col">{{ bloque.encabezadoFila }}</th>
-              <th scope="col" class="col-barra"><span class="sr-only">Proporción</span></th>
-              <th v-for="columna in bloque.columnas" :key="columna" scope="col" class="num">
-                {{ columna }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="fila in bloque.filas" :key="fila.etiqueta">
-              <th scope="row">{{ fila.etiqueta }}</th>
-              <td class="col-barra">
-                <!-- Barra proporcional al valor más alto de la columna marcada en "barra" -->
-                <div class="barra-fondo">
-                  <div
-                    class="barra"
-                    :style="{ width: porcentaje(bloque, fila) + '%' }"
-                    :title="`${fila.etiqueta}: ${formato(fila.valores[bloque.barra])} ${bloque.columnas[bloque.barra]}`"
-                  ></div>
-                </div>
-              </td>
-              <td v-for="(valor, i) in fila.valores" :key="i" class="num">{{ formato(valor) }}</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th scope="row">Total</th>
-              <td class="col-barra"></td>
-              <td v-for="(columna, i) in bloque.columnas" :key="columna" class="num">
-                {{ formato(totalDeColumna(bloque, i)) }}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </article>
-    </div>
-
-    <p class="fuente">Fuente: presentación "Escenario Tecnológico ZOT Puebla – Tlaxcala".</p>
+    <p class="et-fuente">
+      Fuente: Escenario Tecnológico, Zona de Operación de Transmisión Puebla – Tlaxcala.
+    </p>
   </section>
 </template>
 
 <script>
-import { bloques } from '@/data/escenarioTecnologico';
-
 export default {
   name: 'EscenarioTecnologicoView',
   data() {
-    return { bloques };
+    return {
+      // Para actualizar una cifra, solo se cambia el número; el total se calcula solo
+      tablas: [
+        {
+          titulo: 'Subestaciones',
+          encabezado: 'Red',
+          columnas: ['Número de subestaciones'],
+          filas: [
+            { nombre: 'RST', valores: [99] },
+            { nombre: 'RNT', valores: [16] },
+            { nombre: 'RT', valores: [115] }
+          ]
+        },
+        {
+          titulo: 'Líneas de transmisión',
+          encabezado: 'Nivel de tensión',
+          columnas: ['Número de líneas', 'Kilómetros'],
+          filas: [
+            { nombre: '400 kV', valores: [6, 139] },
+            { nombre: '230 kV', valores: [9, 272] },
+            { nombre: '115 kV', valores: [118, 2238] },
+            { nombre: '69 kV', valores: [2, 77] }
+          ]
+        },
+        {
+          titulo: 'Interruptores instalados',
+          encabezado: 'Nivel de tensión',
+          columnas: ['Número de interruptores'],
+          filas: [
+            { nombre: '400 kV', valores: [63] },
+            { nombre: '230 kV', valores: [57] },
+            { nombre: '115 kV', valores: [382] },
+            { nombre: '69 kV', valores: [2] }
+          ]
+        },
+        {
+          titulo: 'Capacidad instalada',
+          encabezado: 'Nivel de tensión',
+          columnas: ['MVA'],
+          filas: [
+            { nombre: '400 kV', valores: [3261] },
+            { nombre: '230 kV', valores: [1198] },
+            { nombre: '115 kV', valores: [3087] },
+            { nombre: '69 kV', valores: [26] }
+          ]
+        }
+      ]
+    };
   },
   methods: {
-    // Suma una columna del bloque (0 = primera columna de números)
-    totalDeColumna(bloque, indice) {
-      return bloque.filas.reduce((suma, fila) => suma + fila.valores[indice], 0);
+    // Suma la columna "j" de una tabla
+    total(tabla, j) {
+      let suma = 0;
+      for (const fila of tabla.filas) {
+        suma += fila.valores[j];
+      }
+      return suma;
     },
-    // Ancho de la barra: el valor más alto del bloque ocupa el 100 %
-    porcentaje(bloque, fila) {
-      const maximo = Math.max(...bloque.filas.map(f => f.valores[bloque.barra]));
-      return maximo ? (fila.valores[bloque.barra] / maximo) * 100 : 0;
-    },
-    // 2238 → "2,238"
+    // 2238 → 2,238
     formato(numero) {
       return numero.toLocaleString('es-MX');
     }
@@ -98,110 +112,56 @@ export default {
 </script>
 
 <style scoped>
-.subtitulo {
-  margin: -8px 0 20px 0;
-  font-size: 13px;
-  color: #666;
+.et-intro {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
 }
 
-/* --- Resumen --- */
-.resumen {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 15px;
-  margin-bottom: 25px;
-}
-.resumen-tile {
-  background: white;
-  border-radius: 8px;
-  padding: 16px 18px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border-top: 4px solid #009a44;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.resumen-icono { font-size: 22px; }
-.resumen-titulo { font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
-.resumen-valor { font-size: 28px; font-weight: 700; color: #222; line-height: 1.1; }
-.resumen-valor small { font-size: 13px; font-weight: 600; color: #555; }
-.resumen-extra { font-size: 12px; color: #666; }
+.et-bloque { margin-bottom: 30px; }
 
-/* --- Tablas --- */
-.bloques {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-}
-.bloque {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.bloque-titulo {
-  margin: 0;
-  background-color: #009a44;
-  color: white;
+.et-titulo {
   font-size: 15px;
-  padding: 12px 18px;
-  border-bottom: 4px solid #e2c044;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 10px 0;
 }
-.tabla {
+
+.et-tabla {
   width: 100%;
+  max-width: 600px;
   border-collapse: collapse;
-  font-size: 13px;
+  background: white;
+  font-size: 14px;
 }
-.tabla th,
-.tabla td {
-  padding: 9px 18px;
+.et-tabla th,
+.et-tabla td {
+  border: 1px solid #d9d9d9;
+  padding: 8px 14px;
   text-align: left;
 }
-.tabla thead th {
-  font-size: 11px;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-  border-bottom: 1px solid #eee;
-  white-space: nowrap;
+.et-tabla thead th {
+  background-color: #009a44;
+  color: white;
+  font-weight: 600;
 }
-.tabla tbody tr + tr { border-top: 1px solid #f2f2f2; }
-.tabla tbody th { font-weight: 600; color: #333; white-space: nowrap; }
-.tabla .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; color: #222; }
-.tabla tfoot th,
-.tabla tfoot td { border-top: 2px solid #e0f2e9; font-weight: 700; color: #222; }
+.et-tabla tbody tr:nth-child(even) { background-color: #f7f7f7; }
+.et-tabla tfoot td {
+  font-weight: bold;
+  background-color: #eeeeee;
+}
+.et-tabla .num { text-align: right; }
 
-/* Barra: fondo verde muy claro y relleno verde CFE, con punta redondeada */
-.col-barra { width: 40%; }
-.barra-fondo {
-  background: #eef6f1;
-  border-radius: 4px;
-  height: 8px;
-  overflow: hidden;
-}
-.barra {
-  background: #009a44;
-  height: 100%;
-  border-radius: 0 4px 4px 0;
-  min-width: 2px;
+.et-fuente {
+  font-size: 12px;
+  color: #777;
+  margin-top: 10px;
 }
 
-.fuente { margin-top: 15px; font-size: 11px; color: #888; }
-
-/* Texto solo para lectores de pantalla */
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
-/* Celular: tablas más compactas */
 @media (max-width: 480px) {
-  .tabla th,
-  .tabla td { padding: 8px 10px; }
-  .col-barra { width: 30%; }
-  .resumen-valor { font-size: 24px; }
+  .et-tabla { font-size: 13px; }
+  .et-tabla th,
+  .et-tabla td { padding: 7px 8px; }
 }
 </style>
