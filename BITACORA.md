@@ -371,3 +371,46 @@ Se usa `v-if` / `v-else-if` / `v-else` para que solo se dibuje una de las cuatro
 | Compromisos GRTC | *pendiente* | |
 
 Las páginas internas `CicloView.vue` y `SigetView.vue`, y sus rutas, siguen en el proyecto pero ya no se usan desde el menú. Se pueden borrar más adelante (primero el `import` y la ruta en `router/index.js`, después el archivo).
+
+---
+
+## 2026-11-05
+
+### Contenido de "Escenario Tecnológico"
+
+**Qué se pidió**
+Llenar la página Escenario Tecnológico con la información de la presentación "Escenario Tecnológico ZOT Puebla - Tlaxcala" (PDF de 5 láminas). Después se pidió un diseño más sencillo y formal.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #10: primero se une #10 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/EscenarioTecnologicoView.vue` | La página muestra cuatro tablas con la información de la presentación. |
+
+**Datos (tal cual la presentación)**
+
+| Tabla | Desglose | Total |
+|---|---|---|
+| 1. Subestaciones | RST 99 · RNT 16 · RT 115 | 230 |
+| 2. Líneas de transmisión | 400 kV: 6 líneas, 139 km · 230 kV: 9, 272 km · 115 kV: 118, 2,238 km · 69 kV: 2, 77 km | 135 líneas, 2,726 km |
+| 3. Interruptores instalados | 400 kV 63 · 230 kV 57 · 115 kV 382 · 69 kV 2 | 504 |
+| 4. Capacidad instalada (MVA) | 400 kV 3,261 · 230 kV 1,198 · 115 kV 3,087 · 69 kV 26 | 7,572 |
+
+Los totales no venían en la presentación: la página los calcula sumando las filas.
+
+**Cómo funciona**
+
+1. **Los datos están dentro de la página**, en `data()`, igual que en otras vistas del proyecto. Hay una lista `tablas`; cada tabla tiene `titulo`, `encabezado` (la primera columna), `columnas` (los encabezados de los números) y `filas` (cada una con `nombre` y sus `valores`, en el mismo orden que `columnas`). Para actualizar una cifra solo se cambia el número.
+
+2. **Las tablas se dibujan con `v-for`.** El primer `v-for` recorre las cuatro tablas y les pone número (`i + 1`); dentro, otro `v-for` recorre las filas y otro los valores. Así, una sola plantilla dibuja las cuatro tablas.
+
+3. **El total se calcula solo.** El método `total(tabla, j)` recorre las filas con un `for` y suma la columna `j`. Va en el `<tfoot>`, la parte de la tabla para totales.
+
+4. **Formato de números.** `formato()` usa `toLocaleString('es-MX')`, que convierte `2238` en `2,238`.
+
+5. **Estilo formal.** Tablas con bordes grises delgados, encabezado verde CFE con texto blanco, filas alternadas en gris muy claro y la fila de total en negritas. Los números van alineados a la derecha, como en un informe. Al final se cita la fuente.
+
+**Primera versión descartada**
+La primera versión tenía tarjetas de resumen con íconos y barras de colores en cada fila. Se reemplazó porque se veía informal; también se eliminó el archivo `src/data/escenarioTecnologico.js`, que ya no hace falta.
