@@ -516,7 +516,7 @@ Conectar la pestaña Programación y Equipos y darle su menú: FODA, Comunicacio
 **Qué se pidió**
 Agregar a Sitios de interés: Gerencia Regional de Transmisión Central, GCRO, Mi CFE, SUTERM, Portal de Comprobantes Fiscales, CIJUBILA, Energía a Debate y FHSSTE, con una presentación más formal que la de tarjetas.
 
-**Estado:** en revisión (pull request abierto). Depende del PR #13: se unen en orden #12, #13 y después este. Falta solo la dirección de CIJUBILA.
+**Estado:** en revisión (pull request abierto). Depende del PR #13: se unen en orden #12, #13 y después este. Todos los sitios tienen su dirección.
 
 **Archivos**
 
@@ -542,10 +542,10 @@ Agregar a Sitios de interés: Gerencia Regional de Transmisión Central, GCRO, M
 | Mi CFE | `https://mi.cfe.mx/` |
 | SUTERM | `https://www.suterm.mx/es/` |
 | Portal de Comprobantes Fiscales | `https://verificacfdi.facturaelectronica.sat.gob.mx/` (verificación de CFDI del SAT) |
-| CIJUBILA | *pendiente* |
+| CIJUBILA | `https://verificacfdi.facturaelectronica.sat.gob.mx/` |
 | Energía a Debate | `https://energiaadebate.com/` |
 | FHSSTE | `https://intranet.cfemex.com/fhsste/pages/default.aspx` (red interna) |
 
-"GCRO" se corrigió a **"GCROR"**, como viene en su dirección. Las direcciones que llegaron sin la primera letra (`ttps://`) se corrigieron a `https://`. La dirección del SAT venía junto a CIJUBILA, pero corresponde a la verificación de comprobantes fiscales, así que se asignó al Portal de Comprobantes Fiscales; CIJUBILA queda pendiente.
+"GCRO" se corrigió a **"GCROR"**, como viene en su dirección. Las direcciones que llegaron sin la primera letra (`ttps://`) se corrigieron a `https://`. La dirección del SAT venía junto a CIJUBILA, pero corresponde a la verificación de comprobantes fiscales, así que se asignó al Portal de Comprobantes Fiscales. Después se confirmó que CIJUBILA también usa ese mismo enlace.
 
 Para agregar una dirección, en `enlaces.js` se cambia `url: null` por `url: 'https://...'`. Si es de intranet, también se agrega `interno: true`.

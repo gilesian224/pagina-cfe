@@ -23,7 +23,7 @@ export const categorias = [
       { titulo: 'Mi CFE', url: 'https://mi.cfe.mx/' },
       { titulo: 'SUTERM', descripcion: 'Sindicato Único de Trabajadores Electricistas de la República Mexicana.', url: 'https://www.suterm.mx/es/' },
       { titulo: 'Portal de Comprobantes Fiscales', descripcion: 'Verificación de comprobantes fiscales digitales (CFDI) del SAT.', url: 'https://verificacfdi.facturaelectronica.sat.gob.mx/' },
-      { titulo: 'CIJUBILA', url: null },
+      { titulo: 'CIJUBILA', url: 'https://verificacfdi.facturaelectronica.sat.gob.mx/' },
       { titulo: 'Energía a Debate', descripcion: 'Publicación de análisis y opinión sobre el sector energético.', url: 'https://energiaadebate.com/' },
       { titulo: 'FHSSTE', url: 'https://intranet.cfemex.com/fhsste/pages/default.aspx', interno: true }
     ]
