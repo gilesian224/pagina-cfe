@@ -510,3 +510,34 @@ Conectar la pestaña Programación y Equipos y darle su menú: FODA, Comunicacio
 2. **Nombre de sección con guion.** En `menus`, el bloque se escribe entre comillas, `'programacion-equipos': { ... }`, porque en JavaScript un nombre con guion necesita comillas. El valor debe coincidir en la pestaña, en el bloque y en el `meta.seccion` de cada ruta.
 3. **Sin archivos nuevos.** Todas las páginas, incluida la principal de la pestaña, usan `PaginaSeccionView.vue` con su `meta.titulo`, igual que las nuevas de Operación.
 4. **Nombres de ruta con prefijo `pe-`.** Ya existen `foda` (Superintendencia) y `foda-operacion`, así que el de esta sección es `pe-foda`, y lo mismo con las demás.
+
+### Sitios de interés: diseño formal y nuevos sitios
+
+**Qué se pidió**
+Agregar a Sitios de interés: Gerencia Regional de Transmisión Central, GCRO, Mi CFE, SUTERM, Portal de Comprobantes Fiscales, CIJUBILA, Energía a Debate y FHSSTE, con una presentación más formal que la de tarjetas.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #13: se unen en orden #12, #13 y después este. Faltan las direcciones de 7 de los 8 sitios nuevos.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/enlaces.js` | Nueva categoría "Sitios de consulta" con los 8 sitios; se quitan los íconos; `url` puede ser `null`. |
+| `src/views/EnlacesView.vue` | Las tarjetas se reemplazan por una tabla formal por categoría. |
+
+**Cómo funciona**
+
+1. **Tabla formal**, con el mismo estilo que Escenario Tecnológico: encabezado verde CFE, bordes grises delgados y filas alternadas. Dos columnas: **Sitio** (nombre en negritas, descripción opcional y nota de red interna) y **Acceso**.
+2. **Enlace o "Dirección pendiente".** En la columna Acceso, `v-if="enlace.url"` muestra "Abrir sitio ↗" (se abre en una pestaña nueva). Si `url` es `null`, `v-else` muestra "Dirección pendiente" en gris. Así un sitio puede aparecer en la lista aunque todavía no se tenga su dirección.
+3. **Nota de red interna.** Los sitios con `interno: true` (como SIMOCE) muestran *"Disponible solo en la red interna de CFE."* en lugar del aviso amarillo anterior.
+4. **Menú lateral.** Como las categorías generan el menú solas, ahora la barra lateral de Sitios de interés muestra "Sistemas internos" y "Sitios de consulta".
+
+**Direcciones**
+
+| Sitio | Dirección |
+|---|---|
+| SIMOCE | `http://10.9.30.134/calidad/` (red interna) |
+| Energía a Debate | `https://energiaadebate.com` (sitio oficial, verificado) |
+| Gerencia Regional de Transmisión Central, GCRO, Mi CFE, SUTERM, Portal de Comprobantes Fiscales, CIJUBILA, FHSSTE | *pendientes* |
+
+Para agregar una dirección, en `enlaces.js` se cambia `url: null` por `url: 'https://...'`. Si es de intranet, también se agrega `interno: true`.
