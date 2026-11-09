@@ -6,7 +6,7 @@ export const pestanas = [
   { texto: 'Inicio', ruta: '/', seccion: 'inicio' },
   { texto: 'Superintendencia', ruta: '/superintendencia', seccion: 'superintendencia' },
   { texto: 'Operación', ruta: '/operacion', seccion: 'operacion' },
-  { texto: 'Programación y Equipos', ruta: null, seccion: null },
+  { texto: 'Programación y Equipos', ruta: '/programacion-equipos', seccion: 'programacion-equipos' },
   { texto: 'Sitios de interés', ruta: '/enlaces', seccion: 'enlaces' }
 ];
 
@@ -110,6 +110,33 @@ export const menus = {
           { texto: 'SISNOV', ruta: '/operacion/analisis/sisnov' }
         ]
       }
+    ]
+  },
+  'programacion-equipos': {
+    titulo: 'Programación y Equipos',
+    opciones: [
+      { texto: 'FODA', ruta: '/programacion-equipos/foda' },
+      { texto: 'Comunicaciones', ruta: '/programacion-equipos/comunicaciones' },
+      {
+        texto: 'Control',
+        ruta: null,
+        subopciones: [
+          { texto: 'SCADA', ruta: '/programacion-equipos/control/scada' },
+          { texto: 'SENTOCs', ruta: '/programacion-equipos/control/sentocs' },
+          { texto: 'Sabad', ruta: '/programacion-equipos/control/sabad' }
+        ]
+      },
+      {
+        texto: 'Control de gestión',
+        ruta: null,
+        subopciones: [
+          { texto: 'SITIC', ruta: '/programacion-equipos/control-gestion/sitic' },
+          { texto: 'SIECOM', ruta: '/programacion-equipos/control-gestion/siecom' },
+          { texto: 'Mesa de servicio', ruta: '/programacion-equipos/control-gestion/mesa-servicio' }
+        ]
+      },
+      { texto: 'AM (inventario)', ruta: '/programacion-equipos/am' },
+      { texto: 'PM', ruta: '/programacion-equipos/pm' }
     ]
   },
   enlaces: {

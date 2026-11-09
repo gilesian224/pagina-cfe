@@ -66,6 +66,18 @@ const routes = [
   { path: '/operacion/analisis/simoce/ddcor', name: 'op-ddcor', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'DDCOR' } },
   { path: '/operacion/analisis/simoce/ddse', name: 'op-ddse', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'DDSE' } },
   { path: '/operacion/analisis/sisnov', name: 'op-sisnov', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'SISNOV' } },
+  // Programación y Equipos: páginas sin contenido todavía; usan la página genérica con su título
+  { path: '/programacion-equipos', name: 'programacion-equipos', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'Programación y Equipos' } },
+  { path: '/programacion-equipos/foda', name: 'pe-foda', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'FODA' } },
+  { path: '/programacion-equipos/comunicaciones', name: 'pe-comunicaciones', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'Comunicaciones' } },
+  { path: '/programacion-equipos/control/scada', name: 'pe-scada', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'SCADA' } },
+  { path: '/programacion-equipos/control/sentocs', name: 'pe-sentocs', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'SENTOCs' } },
+  { path: '/programacion-equipos/control/sabad', name: 'pe-sabad', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'Sabad' } },
+  { path: '/programacion-equipos/control-gestion/sitic', name: 'pe-sitic', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'SITIC' } },
+  { path: '/programacion-equipos/control-gestion/siecom', name: 'pe-siecom', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'SIECOM' } },
+  { path: '/programacion-equipos/control-gestion/mesa-servicio', name: 'pe-mesa-servicio', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'Mesa de servicio' } },
+  { path: '/programacion-equipos/am', name: 'pe-am', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'AM (inventario)' } },
+  { path: '/programacion-equipos/pm', name: 'pe-pm', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'PM' } },
   { path: '/enlaces/:categoria?', name: 'enlaces', component: EnlacesView, meta: { seccion: 'enlaces' } }
 ];
 
