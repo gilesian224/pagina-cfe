@@ -22,10 +22,7 @@ export const menus = {
       { texto: 'Escenario Tecnológico', ruta: '/escenario-tecnologico' },
       { texto: 'Misión, Visión y Ambición', ruta: '/vision-mision-ambicion' },
       { texto: 'Organigrama', ruta: '/organigrama' },
-      { texto: 'Directorio ZOTPT', ruta: '/directorio-zotpt' },
-      { texto: 'Directorio ZOTVER', ruta: '/directorio-zotver' },
-      { texto: 'Directorio ZOTGM', ruta: '/directorio-zotgm' },
-      { texto: 'GRTC', ruta: '/grtc' }
+      { texto: 'Directorios', url: 'http://10.25.110.2:8080/comnes/extensionesSE.do' }
     ]
   },
   superintendencia: {

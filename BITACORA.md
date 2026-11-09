@@ -594,3 +594,30 @@ En `menus.js`, a cada opción se le cambió `ruta: '/...'` por `url: 'http://...
 - Superintendencia: FODA
 - Operación: FODA · CENACE › Calendario SIASAM, Formato de carga masiva · Operación › Acciones de control, Código de red 1 y 2, Guías, Procedimientos, Directorios · SIASAM › Relieve, SIVAP · Análisis › SIMOCE › DDCOR, DDSE
 - Programación y Equipos: FODA, Comunicaciones · Control › SCADA, SENTOCs, Sabad · Control de gestión › Mesa de servicio · PM
+
+### Inicio: un solo "Directorios" en lugar de los tres directorios y GRTC
+
+**Qué se pidió**
+En el menú de Inicio, quitar Directorio ZOTPT, Directorio ZOTVER, Directorio ZOTGM y GRTC, y poner en su lugar una sola opción, "Directorios", con el enlace `http://10.25.110.2:8080/comnes/extensionesSE.do`.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #15: se unen en orden #12, #13, #14, #15 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | Cuatro opciones se reemplazan por "Directorios" con `url`. |
+| `src/router/index.js` | Se quitan las 4 rutas y sus `import`. |
+| `src/views/DirectorioZotgmView.vue`, `DirectorioZotptView.vue`, `DirectorioZotverView.vue`, `GrtcView.vue` | **Eliminados.** Ya no se usan. |
+
+**Menú de Inicio**
+```
+› Ubicación
+› Escenario Tecnológico
+› Misión, Visión y Ambición
+› Organigrama
+› Directorios ↗     http://10.25.110.2:8080/comnes/extensionesSE.do
+```
+
+**Cómo funciona**
+"Directorios" lleva `url` en lugar de `ruta`, así que abre el sistema de extensiones en una pestaña nueva, como los demás enlaces externos. Como las cuatro páginas anteriores ya no tenían forma de abrirse desde el menú, se borraron en este orden: primero sus rutas y `import` en el router, después los archivos. Así se evita el error *"Module not found"*.
