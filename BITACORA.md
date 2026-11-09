@@ -621,3 +621,23 @@ En el menú de Inicio, quitar Directorio ZOTPT, Directorio ZOTVER, Directorio ZO
 
 **Cómo funciona**
 "Directorios" lleva `url` en lugar de `ruta`, así que abre el sistema de extensiones en una pestaña nueva, como los demás enlaces externos. Como las cuatro páginas anteriores ya no tenían forma de abrirse desde el menú, se borraron en este orden: primero sus rutas y `import` en el router, después los archivos. Así se evita el error *"Module not found"*.
+
+### Inicio: se quitan "Sitios de Interés" y "Actualizaciones Recientes"
+
+**Qué se pidió**
+Quitar de la página de Inicio las tarjetas de "Sitios de Interés" (Normateca, Servicios Tecnológicos, SIRH Formatos, GIDD Capacitación, Género e Inclusión) y los botones de "Actualizaciones Recientes".
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/InicioView.vue` | Ya no usa ninguno de los dos componentes; queda lista para nuevo contenido. |
+| `src/components/SitiosInteres.vue` | **Eliminado.** |
+| `src/components/ActualizacionesRecientes.vue` | **Eliminado.** |
+
+**Cómo funciona**
+La página de Inicio solo mostraba esos dos componentes (`<SitiosInteres />` y `<ActualizacionesRecientes />`). Se quitaron sus etiquetas, sus `import` y su registro en `components`, y como no se usaban en ninguna otra parte, también se borraron sus archivos. La barra lateral, el carrusel y el calendario no cambian.
+
+Con esto también desaparece la duplicidad de nombre que había entre la sección "Sitios de Interés" de Inicio y la pestaña "Sitios de interés".

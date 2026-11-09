@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <SitiosInteres />
-    <ActualizacionesRecientes />
-  </div>
+  <section class="section">
+    <!-- Aquí va el contenido de la página de Inicio -->
+  </section>
 </template>
 
 <script>
-import SitiosInteres from '../components/SitiosInteres.vue';
-import ActualizacionesRecientes from '../components/ActualizacionesRecientes.vue';
-
 export default {
-  name: 'InicioView',
-  components: { SitiosInteres, ActualizacionesRecientes }
+  name: 'InicioView'
 }
 </script>
