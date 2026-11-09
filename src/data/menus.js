@@ -73,6 +73,42 @@ export const menus = {
           { texto: 'Calendario SIASAM', ruta: '/operacion/cenace/calendario-siasam' },
           { texto: 'Formato de carga masiva', ruta: '/operacion/cenace/formato-carga-masiva' }
         ]
+      },
+      {
+        texto: 'Operación',
+        ruta: null,
+        subopciones: [
+          { texto: 'Acciones de control', ruta: '/operacion/operacion/acciones-control' },
+          { texto: 'Código de red 1 y 2', ruta: '/operacion/operacion/codigo-red' },
+          { texto: 'Guías', ruta: '/operacion/operacion/guias' },
+          { texto: 'Procedimientos', ruta: '/operacion/operacion/procedimientos' },
+          { texto: 'Directorios', ruta: '/operacion/operacion/directorios' },
+          { texto: 'Cemodat web', ruta: '/operacion/operacion/cemodat-web' }
+        ]
+      },
+      {
+        texto: 'SIASAM',
+        ruta: null,
+        subopciones: [
+          { texto: 'Relieve', ruta: '/operacion/siasam/relieve' },
+          { texto: 'Sonorel', ruta: '/operacion/siasam/sonorel' },
+          { texto: 'SIVAP', ruta: '/operacion/siasam/sivap' }
+        ]
+      },
+      {
+        texto: 'Análisis',
+        ruta: null,
+        subopciones: [
+          {
+            texto: 'SIMOCE',
+            ruta: null,
+            subopciones: [
+              { texto: 'DDCOR', ruta: '/operacion/analisis/simoce/ddcor' },
+              { texto: 'DDSE', ruta: '/operacion/analisis/simoce/ddse' }
+            ]
+          },
+          { texto: 'SISNOV', ruta: '/operacion/analisis/sisnov' }
+        ]
       }
     ]
   },
