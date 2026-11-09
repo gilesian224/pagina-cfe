@@ -516,7 +516,7 @@ Conectar la pestaña Programación y Equipos y darle su menú: FODA, Comunicacio
 **Qué se pidió**
 Agregar a Sitios de interés: Gerencia Regional de Transmisión Central, GCRO, Mi CFE, SUTERM, Portal de Comprobantes Fiscales, CIJUBILA, Energía a Debate y FHSSTE, con una presentación más formal que la de tarjetas.
 
-**Estado:** en revisión (pull request abierto). Depende del PR #13: se unen en orden #12, #13 y después este. Faltan las direcciones de 7 de los 8 sitios nuevos.
+**Estado:** en revisión (pull request abierto). Depende del PR #13: se unen en orden #12, #13 y después este. Falta solo la dirección de CIJUBILA.
 
 **Archivos**
 
@@ -537,7 +537,15 @@ Agregar a Sitios de interés: Gerencia Regional de Transmisión Central, GCRO, M
 | Sitio | Dirección |
 |---|---|
 | SIMOCE | `http://10.9.30.134/calidad/` (red interna) |
-| Energía a Debate | `https://energiaadebate.com` (sitio oficial, verificado) |
-| Gerencia Regional de Transmisión Central, GCRO, Mi CFE, SUTERM, Portal de Comprobantes Fiscales, CIJUBILA, FHSSTE | *pendientes* |
+| Gerencia Regional de Transmisión Central | `http://10.25.15.142:8080/central` (red interna) |
+| GCROR | `http://10.25.117.65:8086/enlaces_cenace/enlaces_gcror.html` (red interna) |
+| Mi CFE | `https://mi.cfe.mx/` |
+| SUTERM | `https://www.suterm.mx/es/` |
+| Portal de Comprobantes Fiscales | `https://verificacfdi.facturaelectronica.sat.gob.mx/` (verificación de CFDI del SAT) |
+| CIJUBILA | *pendiente* |
+| Energía a Debate | `https://energiaadebate.com/` |
+| FHSSTE | `https://intranet.cfemex.com/fhsste/pages/default.aspx` (red interna) |
+
+"GCRO" se corrigió a **"GCROR"**, como viene en su dirección. Las direcciones que llegaron sin la primera letra (`ttps://`) se corrigieron a `https://`. La dirección del SAT venía junto a CIJUBILA, pero corresponde a la verificación de comprobantes fiscales, así que se asignó al Portal de Comprobantes Fiscales; CIJUBILA queda pendiente.
 
 Para agregar una dirección, en `enlaces.js` se cambia `url: null` por `url: 'https://...'`. Si es de intranet, también se agrega `interno: true`.

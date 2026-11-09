@@ -18,14 +18,14 @@ export const categorias = [
     id: 'sitios-consulta',
     nombre: 'Sitios de consulta',
     enlaces: [
-      { titulo: 'Gerencia Regional de Transmisión Central', url: null },
-      { titulo: 'GCRO', url: null },
-      { titulo: 'Mi CFE', url: null },
-      { titulo: 'SUTERM', descripcion: 'Sindicato Único de Trabajadores Electricistas de la República Mexicana.', url: null },
-      { titulo: 'Portal de Comprobantes Fiscales', url: null },
+      { titulo: 'Gerencia Regional de Transmisión Central', url: 'http://10.25.15.142:8080/central', interno: true },
+      { titulo: 'GCROR', url: 'http://10.25.117.65:8086/enlaces_cenace/enlaces_gcror.html', interno: true },
+      { titulo: 'Mi CFE', url: 'https://mi.cfe.mx/' },
+      { titulo: 'SUTERM', descripcion: 'Sindicato Único de Trabajadores Electricistas de la República Mexicana.', url: 'https://www.suterm.mx/es/' },
+      { titulo: 'Portal de Comprobantes Fiscales', descripcion: 'Verificación de comprobantes fiscales digitales (CFDI) del SAT.', url: 'https://verificacfdi.facturaelectronica.sat.gob.mx/' },
       { titulo: 'CIJUBILA', url: null },
-      { titulo: 'Energía a Debate', descripcion: 'Publicación de análisis y opinión sobre el sector energético.', url: 'https://energiaadebate.com' },
-      { titulo: 'FHSSTE', url: null }
+      { titulo: 'Energía a Debate', descripcion: 'Publicación de análisis y opinión sobre el sector energético.', url: 'https://energiaadebate.com/' },
+      { titulo: 'FHSSTE', url: 'https://intranet.cfemex.com/fhsste/pages/default.aspx', interno: true }
     ]
   }
 ];
