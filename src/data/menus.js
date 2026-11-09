@@ -41,21 +41,21 @@ export const menus = {
             texto: 'Formato de registro',
             ruta: null,
             subopciones: [
-              { texto: 'Lista de asistencia', ruta: '/superintendencia/procedimientos/lista-asistencia' },
-              { texto: 'Formato de asistencia', ruta: '/superintendencia/procedimientos/formato-asistencia' }
+              { texto: 'Lista de asistencia', url: 'http://10.25.15.142:8080/asistenciaSettings/asistencia.do' },
+              { texto: 'Formato de asistencia', url: 'http://sf.cfe.mx/web/login' }
             ]
           }
         ]
       },
       { texto: 'FODA', ruta: '/superintendencia/foda' },
-      { texto: 'Compromisos GRTC', ruta: '/superintendencia/compromisos-grtc' },
+      { texto: 'Compromisos GRTC', url: 'http://10.25.15.142:8080/compromisos/Welcome.do' },
       { texto: 'SICLO', url: 'http://siclo.cfemex.com/Intranet/Index.aspx' },
       { texto: 'SIGET', url: 'http://10.21.1.138/indices/index/login.aspx' },
       {
         texto: 'Capacitación',
         ruta: null,
         subopciones: [
-          { texto: 'Programa de capacitación', ruta: '/superintendencia/capacitacion/programa' }
+          { texto: 'Programa de capacitación', url: 'http://10.25.15.142:8080/central/especialidad.do?page=5&tag=tem' }
         ]
       }
     ]
@@ -68,8 +68,8 @@ export const menus = {
         texto: 'CENACE',
         ruta: null,
         subopciones: [
-          { texto: 'Consulta de solicitudes y licencias', ruta: '/operacion/cenace/solicitudes-licencias' },
-          { texto: 'Sistema web de salidas forzadas', ruta: '/operacion/cenace/salidas-forzadas' },
+          { texto: 'Consulta de solicitudes y licencias', url: 'http://10.72.111.102/ReportesRelieve/Home/LogIn' },
+          { texto: 'Sistema web de salidas forzadas', url: 'https://servicios.cenace.gob.mx/SWSF/' },
           { texto: 'Calendario SIASAM', ruta: '/operacion/cenace/calendario-siasam' },
           { texto: 'Formato de carga masiva', ruta: '/operacion/cenace/formato-carga-masiva' }
         ]
@@ -83,7 +83,7 @@ export const menus = {
           { texto: 'Guías', ruta: '/operacion/operacion/guias' },
           { texto: 'Procedimientos', ruta: '/operacion/operacion/procedimientos' },
           { texto: 'Directorios', ruta: '/operacion/operacion/directorios' },
-          { texto: 'Cemodat web', ruta: '/operacion/operacion/cemodat-web' }
+          { texto: 'Cemodat web', url: 'http://10.30.26.30/cemodatwebgrtce/' }
         ]
       },
       {
@@ -91,7 +91,7 @@ export const menus = {
         ruta: null,
         subopciones: [
           { texto: 'Relieve', ruta: '/operacion/siasam/relieve' },
-          { texto: 'Sonorel', ruta: '/operacion/siasam/sonorel' },
+          { texto: 'Sonorel', url: 'http://10.25.117.65/Relieve/SoNoRelGMO/login.aspx' },
           { texto: 'SIVAP', ruta: '/operacion/siasam/sivap' }
         ]
       },
@@ -107,7 +107,7 @@ export const menus = {
               { texto: 'DDSE', ruta: '/operacion/analisis/simoce/ddse' }
             ]
           },
-          { texto: 'SISNOV', ruta: '/operacion/analisis/sisnov' }
+          { texto: 'SISNOV', url: 'http://novedades-sdt.cfemex.com/novedades/sisnov_nacional.html' }
         ]
       }
     ]
@@ -130,12 +130,12 @@ export const menus = {
         texto: 'Control de gestión',
         ruta: null,
         subopciones: [
-          { texto: 'SITIC', ruta: '/programacion-equipos/control-gestion/sitic' },
-          { texto: 'SIECOM', ruta: '/programacion-equipos/control-gestion/siecom' },
+          { texto: 'SIITIC', url: 'http://siitic.cfemex.com/shell/logon' },
+          { texto: 'SIECOM', url: 'http://10.25.15.142:8080/inventario/Welcome.do' },
           { texto: 'Mesa de servicio', ruta: '/programacion-equipos/control-gestion/mesa-servicio' }
         ]
       },
-      { texto: 'AM (inventario)', ruta: '/programacion-equipos/am' },
+      { texto: 'AM (inventario)', url: 'http://10.25.117.65/ControlInventarioWebSite/Inicio.aspx' },
       { texto: 'PM', ruta: '/programacion-equipos/pm' }
     ]
   },

@@ -549,3 +549,48 @@ Agregar a Sitios de interés: Gerencia Regional de Transmisión Central, GCRO, M
 "GCRO" se corrigió a **"GCROR"**, como viene en su dirección. Las direcciones que llegaron sin la primera letra (`ttps://`) se corrigieron a `https://`. La dirección del SAT venía junto a CIJUBILA, pero corresponde a la verificación de comprobantes fiscales, así que se asignó al Portal de Comprobantes Fiscales. Después se confirmó que CIJUBILA también usa ese mismo enlace.
 
 Para agregar una dirección, en `enlaces.js` se cambia `url: null` por `url: 'https://...'`. Si es de intranet, también se agrega `interno: true`.
+
+### Enlaces de los menús de Superintendencia, Operación y Programación y Equipos
+
+**Qué se pidió**
+Vincular cada enlace con su opción del menú y hacer la lista de los enlaces que faltan.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #14: se unen en orden #12, #13, #14 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | 12 opciones cambian `ruta` por `url`; "SITIC" se corrige a "SIITIC". |
+
+**Enlaces conectados**
+
+| Menú | Opción | Dirección |
+|---|---|---|
+| Superintendencia › Procedimientos › Formato de registro | Lista de asistencia | `http://10.25.15.142:8080/asistenciaSettings/asistencia.do` |
+| Superintendencia › Procedimientos › Formato de registro | Formato de asistencia | `http://sf.cfe.mx/web/login` |
+| Superintendencia | Compromisos GRTC | `http://10.25.15.142:8080/compromisos/Welcome.do` |
+| Superintendencia › Capacitación | Programa de capacitación | `http://10.25.15.142:8080/central/especialidad.do?page=5&tag=tem` |
+| Operación › CENACE | Consulta de solicitudes y licencias | `http://10.72.111.102/ReportesRelieve/Home/LogIn` |
+| Operación › CENACE | Sistema web de salidas forzadas | `https://servicios.cenace.gob.mx/SWSF/` |
+| Operación › Operación | Cemodat web | `http://10.30.26.30/cemodatwebgrtce/` |
+| Operación › SIASAM | Sonorel | `http://10.25.117.65/Relieve/SoNoRelGMO/login.aspx` |
+| Operación › Análisis | SISNOV | `http://novedades-sdt.cfemex.com/novedades/sisnov_nacional.html` |
+| Programación y Equipos › Control de gestión | SIITIC | `http://siitic.cfemex.com/shell/logon` |
+| Programación y Equipos › Control de gestión | SIECOM | `http://10.25.15.142:8080/inventario/Welcome.do` |
+| Programación y Equipos | AM (inventario) | `http://10.25.117.65/ControlInventarioWebSite/Inicio.aspx` |
+
+Ya estaban conectados desde antes: SICLO y SIGET (Superintendencia).
+
+**Cómo se interpretó la lista**
+- **"Formatos"** se asignó a *Formato de asistencia*, y **"Listas de asistencia"** a *Lista de asistencia* (Superintendencia › Procedimientos › Formato de registro).
+- **"Capacitación"** se asignó a *Programa de capacitación*, que es la única opción dentro de Capacitación.
+- **"SITIC"** se renombró a **"SIITIC"**, como en la lista y en su dirección (`siitic.cfemex.com`).
+
+**Cómo funciona**
+En `menus.js`, a cada opción se le cambió `ruta: '/...'` por `url: 'http://...'`. `MenuOpcion.vue` revisa primero si hay `url`, así que la opción abre el sistema en una pestaña nueva con la flechita ↗. Las rutas y páginas internas de esas opciones siguen en el router, pero el menú ya no las usa.
+
+**Opciones que siguen sin enlace (abren su página con título)**
+- Superintendencia: FODA
+- Operación: FODA · CENACE › Calendario SIASAM, Formato de carga masiva · Operación › Acciones de control, Código de red 1 y 2, Guías, Procedimientos, Directorios · SIASAM › Relieve, SIVAP · Análisis › SIMOCE › DDCOR, DDSE
+- Programación y Equipos: FODA, Comunicaciones · Control › SCADA, SENTOCs, Sabad · Control de gestión › Mesa de servicio · PM
