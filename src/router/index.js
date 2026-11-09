@@ -23,6 +23,7 @@ import SolicitudesLicenciasView from '../views/SolicitudesLicenciasView.vue';
 import SalidasForzadasView from '../views/SalidasForzadasView.vue';
 import CalendarioSiasamView from '../views/CalendarioSiasamView.vue';
 import CargaMasivaView from '../views/CargaMasivaView.vue';
+import PaginaSeccionView from '../views/PaginaSeccionView.vue';
 
 // Se usa el modo hash (#/ruta) para que las páginas internas
 // funcionen en GitHub Pages sin errores 404 al recargar.
@@ -52,6 +53,19 @@ const routes = [
   { path: '/operacion/cenace/salidas-forzadas', name: 'salidas-forzadas', component: SalidasForzadasView, meta: { seccion: 'operacion' } },
   { path: '/operacion/cenace/calendario-siasam', name: 'calendario-siasam', component: CalendarioSiasamView, meta: { seccion: 'operacion' } },
   { path: '/operacion/cenace/formato-carga-masiva', name: 'formato-carga-masiva', component: CargaMasivaView, meta: { seccion: 'operacion' } },
+  // Operación: páginas sin contenido todavía; todas usan la página genérica con su título
+  { path: '/operacion/operacion/acciones-control', name: 'op-acciones-control', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Acciones de control' } },
+  { path: '/operacion/operacion/codigo-red', name: 'op-codigo-red', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Código de red 1 y 2' } },
+  { path: '/operacion/operacion/guias', name: 'op-guias', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Guías' } },
+  { path: '/operacion/operacion/procedimientos', name: 'op-procedimientos', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Procedimientos' } },
+  { path: '/operacion/operacion/directorios', name: 'op-directorios', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Directorios' } },
+  { path: '/operacion/operacion/cemodat-web', name: 'op-cemodat-web', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Cemodat web' } },
+  { path: '/operacion/siasam/relieve', name: 'op-relieve', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Relieve' } },
+  { path: '/operacion/siasam/sonorel', name: 'op-sonorel', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Sonorel' } },
+  { path: '/operacion/siasam/sivap', name: 'op-sivap', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'SIVAP' } },
+  { path: '/operacion/analisis/simoce/ddcor', name: 'op-ddcor', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'DDCOR' } },
+  { path: '/operacion/analisis/simoce/ddse', name: 'op-ddse', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'DDSE' } },
+  { path: '/operacion/analisis/sisnov', name: 'op-sisnov', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'SISNOV' } },
   { path: '/enlaces/:categoria?', name: 'enlaces', component: EnlacesView, meta: { seccion: 'enlaces' } }
 ];
 

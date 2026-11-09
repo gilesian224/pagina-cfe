@@ -414,3 +414,62 @@ Los totales no venían en la presentación: la página los calcula sumando las f
 
 **Primera versión descartada**
 La primera versión tenía tarjetas de resumen con íconos y barras de colores en cada fila. Se reemplazó porque se veía informal; también se eliminó el archivo `src/data/escenarioTecnologico.js`, que ya no hace falta.
+
+---
+
+## 2026-11-09
+
+### Más submenús en Operación
+
+**Qué se pidió**
+Agregar al menú de Operación, además de FODA y CENACE, los grupos Operación, SIASAM y Análisis, con sus submenús.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/PaginaSeccionView.vue` | **Nuevo.** Página genérica que muestra el título que le indica la ruta. |
+| `src/router/index.js` | 12 rutas nuevas que usan la página genérica. |
+| `src/data/menus.js` | Tres grupos desplegables nuevos en el menú de Operación. |
+
+**Menú de Operación completo**
+```
+› FODA
+▸ CENACE
+    (4 opciones, sin cambios)
+▸ Operación
+    › Acciones de control       #/operacion/operacion/acciones-control
+    › Código de red 1 y 2       #/operacion/operacion/codigo-red
+    › Guías                     #/operacion/operacion/guias
+    › Procedimientos            #/operacion/operacion/procedimientos
+    › Directorios               #/operacion/operacion/directorios
+    › Cemodat web               #/operacion/operacion/cemodat-web
+▸ SIASAM
+    › Relieve                   #/operacion/siasam/relieve
+    › Sonorel                   #/operacion/siasam/sonorel
+    › SIVAP                     #/operacion/siasam/sivap
+▸ Análisis
+    ▸ SIMOCE
+        › DDCOR                 #/operacion/analisis/simoce/ddcor
+        › DDSE                  #/operacion/analisis/simoce/ddse
+    › SISNOV                    #/operacion/analisis/sisnov
+```
+
+**Cómo funciona**
+
+1. **Una sola página para las 12 opciones.** En lugar de crear 12 archivos casi iguales que solo cambian el título, todas las rutas nuevas usan `PaginaSeccionView.vue`. Cada ruta le pasa su título en `meta`:
+   ```js
+   { path: '/operacion/siasam/sivap', name: 'op-sivap', component: PaginaSeccionView,
+     meta: { seccion: 'operacion', titulo: 'SIVAP' } },
+   ```
+   y la página lo muestra con `{{ $route.meta.titulo }}`. `$route` es la ruta actual; `meta` es la información extra que le pusimos.
+
+2. **Cuando una opción necesite contenido propio**, se le crea su archivo (por ejemplo `SivapView.vue`) y en su ruta se cambia `component: PaginaSeccionView` por `component: SivapView`, más su `import`. Las demás siguen usando la genérica.
+
+3. **Si una opción es otro sistema** (como SICLO y SIGET), en `menus.js` se cambia `ruta` por `url` con su dirección, y su ruta ya no hace falta.
+
+4. **Nombres de ruta con prefijo `op-`.** Ya existía `procedimientos` en Superintendencia y podría haber más coincidencias, así que todas las rutas nuevas de Operación empiezan con `op-` (`op-procedimientos`, `op-guias`…). Cada `name` del router debe ser único.
+
+5. **Análisis tiene un submenú dentro de otro** (Análisis → SIMOCE → DDCOR/DDSE), igual que Procedimientos en Superintendencia. `MenuOpcion.vue` lo maneja solo, sin cambios.
