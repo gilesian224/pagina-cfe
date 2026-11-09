@@ -473,3 +473,40 @@ Agregar al menú de Operación, además de FODA y CENACE, los grupos Operación,
 4. **Nombres de ruta con prefijo `op-`.** Ya existía `procedimientos` en Superintendencia y podría haber más coincidencias, así que todas las rutas nuevas de Operación empiezan con `op-` (`op-procedimientos`, `op-guias`…). Cada `name` del router debe ser único.
 
 5. **Análisis tiene un submenú dentro de otro** (Análisis → SIMOCE → DDCOR/DDSE), igual que Procedimientos en Superintendencia. `MenuOpcion.vue` lo maneja solo, sin cambios.
+
+### Menú de Programación y Equipos
+
+**Qué se pidió**
+Conectar la pestaña Programación y Equipos y darle su menú: FODA, Comunicaciones, Control (SCADA, SENTOCs, Sabad), Control de gestión (SITIC, SIECOM, Mesa de servicio), AM (inventario) y PM.
+
+**Estado:** en revisión (pull request abierto). Depende del PR #12, porque usa su página genérica: primero se une #12 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/router/index.js` | 11 rutas nuevas (la página de la pestaña y sus 10 opciones), todas con la página genérica. |
+| `src/data/menus.js` | La pestaña ya lleva a `/programacion-equipos`, y se agrega el bloque `'programacion-equipos'` del menú. |
+
+**Menú de Programación y Equipos**
+```
+› FODA                     #/programacion-equipos/foda
+› Comunicaciones           #/programacion-equipos/comunicaciones
+▸ Control
+    › SCADA                #/programacion-equipos/control/scada
+    › SENTOCs              #/programacion-equipos/control/sentocs
+    › Sabad                #/programacion-equipos/control/sabad
+▸ Control de gestión
+    › SITIC                #/programacion-equipos/control-gestion/sitic
+    › SIECOM               #/programacion-equipos/control-gestion/siecom
+    › Mesa de servicio     #/programacion-equipos/control-gestion/mesa-servicio
+› AM (inventario)          #/programacion-equipos/am
+› PM                       #/programacion-equipos/pm
+```
+
+**Cómo funciona**
+
+1. **Pestaña conectada.** En `pestanas`, Programación y Equipos pasó de `ruta: null, seccion: null` a `ruta: '/programacion-equipos', seccion: 'programacion-equipos'`.
+2. **Nombre de sección con guion.** En `menus`, el bloque se escribe entre comillas, `'programacion-equipos': { ... }`, porque en JavaScript un nombre con guion necesita comillas. El valor debe coincidir en la pestaña, en el bloque y en el `meta.seccion` de cada ruta.
+3. **Sin archivos nuevos.** Todas las páginas, incluida la principal de la pestaña, usan `PaginaSeccionView.vue` con su `meta.titulo`, igual que las nuevas de Operación.
+4. **Nombres de ruta con prefijo `pe-`.** Ya existen `foda` (Superintendencia) y `foda-operacion`, así que el de esta sección es `pe-foda`, y lo mismo con las demás.
