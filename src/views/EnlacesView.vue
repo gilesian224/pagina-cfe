@@ -2,37 +2,35 @@
   <section class="section">
     <h2 class="section-title">Sitios de interés</h2>
 
-    <!-- Un bloque por cada categoría visible -->
-    <div v-for="categoria in categoriasVisibles" :key="categoria.id" class="categoria">
-      <h3 class="categoria-titulo">{{ categoria.nombre }}</h3>
+    <!-- Una tabla por cada categoría visible -->
+    <div v-for="categoria in categoriasVisibles" :key="categoria.id" class="si-bloque">
+      <h3 class="si-titulo">{{ categoria.nombre }}</h3>
 
-      <div class="grid-cards">
-        <!-- La tarjeta completa es el enlace; se abre en una pestaña nueva -->
-        <a
-          v-for="enlace in categoria.enlaces"
-          :key="enlace.titulo"
-          :href="enlace.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="card"
-        >
-          <div class="card-icon">{{ enlace.icono }}</div>
-          <h4>{{ enlace.titulo }}</h4>
-          <p>{{ enlace.descripcion }}</p>
-          <span
-            v-if="enlace.interno"
-            class="aviso-interno"
-            title="Esta dirección solo abre desde la red interna de CFE"
-          >
-            🔒 Solo red CFE
-          </span>
-          <span class="btn-card">Abrir ↗</span>
-        </a>
-      </div>
+      <table class="si-tabla">
+        <thead>
+          <tr>
+            <th>Sitio</th>
+            <th class="si-acceso">Acceso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="enlace in categoria.enlaces" :key="enlace.titulo">
+            <td>
+              <span class="si-nombre">{{ enlace.titulo }}</span>
+              <span v-if="enlace.descripcion" class="si-desc">{{ enlace.descripcion }}</span>
+              <span v-if="enlace.interno" class="si-nota">Disponible solo en la red interna de CFE.</span>
+            </td>
+            <td class="si-acceso">
+              <a v-if="enlace.url" :href="enlace.url" target="_blank" rel="noopener noreferrer">Abrir sitio ↗</a>
+              <span v-else class="si-pendiente">Dirección pendiente</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <p v-if="categoriasVisibles.length === 0" class="sin-resultados">
-      No hay enlaces en esta categoría.
+    <p v-if="categoriasVisibles.length === 0" class="si-desc">
+      No hay sitios en esta categoría.
     </p>
   </section>
 </template>
@@ -54,55 +52,52 @@ export default {
 </script>
 
 <style scoped>
-.categoria { margin-bottom: 25px; }
-.categoria-titulo {
-  font-size: 16px;
+.si-bloque { margin-bottom: 30px; }
+
+.si-titulo {
+  font-size: 15px;
+  font-weight: 600;
   color: #333;
-  margin-bottom: 12px;
-  border-left: 4px solid #009a44;
-  padding-left: 8px;
+  margin: 0 0 10px 0;
 }
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
-}
-.card {
+
+.si-tabla {
+  width: 100%;
+  border-collapse: collapse;
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 14px;
 }
-.card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.card-icon { font-size: 30px; margin-bottom: 10px; }
-.card h4 { margin: 0 0 10px 0; font-size: 15px; color: #222; }
-.card p { font-size: 12px; color: #666; margin-bottom: 15px; flex-grow: 1; }
-.aviso-interno {
-  align-self: flex-start;
-  background: #fff6d9;
-  color: #7a5c00;
-  border: 1px solid #e2c044;
-  border-radius: 12px;
-  padding: 3px 10px;
-  font-size: 11px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.si-tabla th,
+.si-tabla td {
+  border: 1px solid #d9d9d9;
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
 }
-.btn-card {
+.si-tabla thead th {
   background-color: #009a44;
   color: white;
-  padding: 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  transition: background 0.3s;
+  font-weight: 600;
 }
-.card:hover .btn-card { background-color: #007a33; }
-.sin-resultados { color: #666; font-size: 14px; }
+.si-tabla tbody tr:nth-child(even) { background-color: #f7f7f7; }
+
+.si-nombre { display: block; font-weight: 600; color: #222; }
+.si-desc { display: block; font-size: 12px; color: #555; margin-top: 3px; }
+.si-nota { display: block; font-size: 12px; color: #777; font-style: italic; margin-top: 3px; }
+
+.si-acceso { width: 170px; white-space: nowrap; }
+.si-acceso a {
+  color: #007a33;
+  font-weight: 600;
+  text-decoration: none;
+}
+.si-acceso a:hover { text-decoration: underline; }
+.si-pendiente { color: #999; font-size: 13px; }
+
+@media (max-width: 480px) {
+  .si-tabla { font-size: 13px; }
+  .si-tabla th,
+  .si-tabla td { padding: 8px; }
+  .si-acceso { width: auto; }
+}
 </style>
