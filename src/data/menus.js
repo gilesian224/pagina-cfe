@@ -18,10 +18,12 @@ export const menus = {
   inicio: {
     titulo: 'Inicio',
     opciones: [
-      { texto: 'Ubicación', ruta: '/ubicacion' },
-      { texto: 'Escenario Tecnológico', ruta: '/escenario-tecnologico' },
       { texto: 'Misión, Visión y Ambición', ruta: '/vision-mision-ambicion' },
       { texto: 'Organigrama', ruta: '/organigrama' },
+      { texto: 'Ubicación', ruta: '/ubicacion' },
+      { texto: 'Escenario Tecnológico', ruta: '/escenario-tecnologico' },
+      
+      
       { texto: 'Directorios', url: 'http://10.25.110.2:8080/comnes/extensionesSE.do' }
     ]
   },
