@@ -641,3 +641,28 @@ Quitar de la página de Inicio las tarjetas de "Sitios de Interés" (Normateca, 
 La página de Inicio solo mostraba esos dos componentes (`<SitiosInteres />` y `<ActualizacionesRecientes />`). Se quitaron sus etiquetas, sus `import` y su registro en `components`, y como no se usaban en ninguna otra parte, también se borraron sus archivos. La barra lateral, el carrusel y el calendario no cambian.
 
 Con esto también desaparece la duplicidad de nombre que había entre la sección "Sitios de Interés" de Inicio y la pestaña "Sitios de interés".
+
+---
+
+## 2026-11-11
+
+### Página de Inicio: presentación de la zona y cifras
+
+**Qué se pidió**
+Llenar el área central de Inicio, que había quedado vacía, combinando una presentación de la zona (con el texto proporcionado por Ian) y las cifras principales del Escenario Tecnológico.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/views/InicioView.vue` | Título, presentación de la zona, recuadro "La zona en cifras" y enlace al Escenario Tecnológico. |
+
+**Cómo funciona**
+
+1. **Presentación.** Los dos párrafos del texto van dentro de un recuadro blanco con borde gris y una línea verde a la izquierda. El texto está justificado en computadora y alineado a la izquierda en celular, donde el justificado deja huecos entre palabras.
+2. **La zona en cifras.** Las cuatro cifras están en `data()`, en la lista `cifras`, y se dibujan con `v-for`. Se muestran en una cuadrícula (`grid`) de 4 columnas que en celular pasa a 2 por fila.
+3. **Enlace.** "Ver escenario tecnológico completo ›" es un `<router-link>` a `/escenario-tecnologico`, la página con el detalle por nivel de tensión.
+
+**Importante:** las cifras son los totales de la página Escenario Tecnológico (230 subestaciones, 2,726 km de líneas, 504 interruptores, 7,572 MVA), pero están escritas por separado. Si se actualizan allá, hay que cambiarlas también en `InicioView.vue`.
