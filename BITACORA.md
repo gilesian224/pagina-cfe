@@ -707,3 +707,34 @@ Reemplazar el logo de ZOTPTX de la barra superior por una versión nueva, en la 
 
 **Cómo funciona**
 El archivo nuevo conserva el nombre `logo-zotptx.jpg`, así que `NavBar.vue` no cambia: su `<img src="@/assets/logo-zotptx.jpg">` toma el logo nuevo automáticamente. Se redujo a 330 px porque en pantalla se muestra a 110 px de alto como máximo; con el triple de resolución se ve nítido en pantallas de alta densidad y la página carga más rápido que con la imagen original.
+
+### Enlaces de SENTOCs, Sabadd y Cemodat web; se quitan SIVAP y SCADA
+
+**Qué se pidió**
+Agregar los enlaces de SENTOCs y Sabadd, actualizar el de Cemodat web y quitar las opciones SIVAP y SCADA.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | Enlaces nuevos y actualizados; se quitan SIVAP y SCADA; "Sabad" se corrige a "Sabadd". |
+| `src/router/index.js` | Se quitan las rutas de SIVAP y SCADA. |
+
+**Enlaces**
+
+| Menú | Opción | Dirección |
+|---|---|---|
+| Programación y Equipos › Control | SENTOCs | `https://10.29.23.135/acceso.asp` (nuevo) |
+| Programación y Equipos › Control | Sabadd | `http://10.29.23.131/sabadd/index.php` (nuevo) |
+| Operación › Operación | Cemodat web | `https://cemodat.appstr.cfe.mx/login` (antes `http://10.30.26.30/cemodatwebgrtce/`) |
+
+**Opciones eliminadas**
+- **Operación › SIASAM › SIVAP**: el grupo SIASAM queda con Relieve y Sonorel.
+- **Programación y Equipos › Control › SCADA**: el grupo Control queda con SENTOCs y Sabadd.
+
+**Cómo funciona**
+Para quitar una opción se borra su línea en `menus.js`. Como SIVAP era la última de su lista, también se quitó la coma de la línea anterior (Sonorel). Sus rutas se borraron del router porque ya nada las usa. No se borró ningún archivo, porque las dos usaban la página genérica `PaginaSeccionView.vue`, que siguen usando las demás.
+
+"Sabad" se renombró a **"Sabadd"**, como viene en la petición y en su dirección (`/sabadd/`).

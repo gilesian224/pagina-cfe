@@ -82,7 +82,7 @@ export const menus = {
           { texto: 'Guías', ruta: '/operacion/operacion/guias' },
           { texto: 'Procedimientos', ruta: '/operacion/operacion/procedimientos' },
           { texto: 'Directorios', ruta: '/operacion/operacion/directorios' },
-          { texto: 'Cemodat web', url: 'http://10.30.26.30/cemodatwebgrtce/' }
+          { texto: 'Cemodat web', url: 'https://cemodat.appstr.cfe.mx/login' }
         ]
       },
       {
@@ -90,8 +90,7 @@ export const menus = {
         ruta: null,
         subopciones: [
           { texto: 'Relieve', ruta: '/operacion/siasam/relieve' },
-          { texto: 'Sonorel', url: 'http://10.25.117.65/Relieve/SoNoRelGMO/login.aspx' },
-          { texto: 'SIVAP', ruta: '/operacion/siasam/sivap' }
+          { texto: 'Sonorel', url: 'http://10.25.117.65/Relieve/SoNoRelGMO/login.aspx' }
         ]
       },
       {
@@ -120,9 +119,8 @@ export const menus = {
         texto: 'Control',
         ruta: null,
         subopciones: [
-          { texto: 'SCADA', ruta: '/programacion-equipos/control/scada' },
-          { texto: 'SENTOCs', ruta: '/programacion-equipos/control/sentocs' },
-          { texto: 'Sabad', ruta: '/programacion-equipos/control/sabad' }
+          { texto: 'SENTOCs', url: 'https://10.29.23.135/acceso.asp' },
+          { texto: 'Sabadd', url: 'http://10.29.23.131/sabadd/index.php' }
         ]
       },
       {
