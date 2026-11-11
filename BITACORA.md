@@ -738,3 +738,19 @@ Agregar los enlaces de SENTOCs y Sabadd, actualizar el de Cemodat web y quitar l
 Para quitar una opción se borra su línea en `menus.js`. Como SIVAP era la última de su lista, también se quitó la coma de la línea anterior (Sonorel). Sus rutas se borraron del router porque ya nada las usa. No se borró ningún archivo, porque las dos usaban la página genérica `PaginaSeccionView.vue`, que siguen usando las demás.
 
 "Sabad" se renombró a **"Sabadd"**, como viene en la petición y en su dirección (`/sabadd/`).
+
+### Pie de página sin "Políticas de privacidad", "Contacto" y "Redes Sociales"
+
+**Qué se pidió**
+Quitar de la barra amarilla del pie de página los textos "Políticas de privacidad", "Contacto" y "Redes Sociales".
+
+**Estado:** en revisión (pull request abierto). Depende del PR #21: primero se une #21 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/components/AppFooter.vue` | Se quita el bloque `footer-right` con los tres textos y sus estilos; el pie pasa de `flex` a `grid` de tres columnas. |
+
+**Cómo funciona**
+Al quitar el bloque de la derecha, con el acomodo anterior (`flex` con `space-between`) la dirección se habría ido hasta la derecha. Por eso el pie ahora usa `display: grid` con `grid-template-columns: 1fr auto 1fr`: "CFE" queda en la columna izquierda, la dirección y el teléfono en la columna central (que mide lo que su texto) y la columna derecha queda vacía. Como las columnas laterales miden lo mismo (`1fr`), la dirección queda centrada en la página. En celular, el pie pasa a una sola columna con todo centrado.
