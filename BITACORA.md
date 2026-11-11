@@ -646,6 +646,31 @@ Con esto también desaparece la duplicidad de nombre que había entre la secció
 
 ## 2026-11-11
 
+### Nuevo orden del menú de Inicio (cambio manual de Ian, PR #19)
+
+**Qué se hizo**
+Ian reordenó a mano el menú lateral de Inicio desde VS Code y lo subió con el PR #19.
+
+**Estado:** aplicado (unido a `main`).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | Las líneas de "Ubicación" y "Escenario Tecnológico" se movieron debajo de "Organigrama". |
+
+**Nuevo orden**
+```
+› Misión, Visión y Ambición
+› Organigrama
+› Ubicación
+› Escenario Tecnológico
+› Directorios ↗
+```
+
+**Cómo funciona**
+El orden del menú es el orden de las líneas dentro de `opciones` en `menus.js`, así que basta con mover las líneas. Las rutas y las páginas no cambian. El cambio dejó dos renglones vacíos antes de "Directorios"; no afectan en nada, pero se pueden borrar para que el archivo quede más limpio.
+
 ### Página de Inicio: presentación de la zona y cifras
 
 **Qué se pidió**
