@@ -6,12 +6,6 @@
       <p>Camino a la Resurrección No. 11045. Junta Auxiliar de la Resurrección. Puebla, Pue. C.P. 72307</p>
       <p>Tel. 01 (55) 53-38-13-00 EXT. 39370 Y 39300</p>
     </div>
-
-    <div class="footer-right">
-      <span>Políticas de privacidad</span>
-      <span>Contacto</span>
-      <span>Redes Sociales</span>
-    </div>
   </footer>
 </template>
 
@@ -25,8 +19,10 @@ export default {
 .footer {
   background-color: #e2c044;
   padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
+  /* Tres columnas: "CFE" a la izquierda, la dirección al centro
+     y una columna vacía a la derecha para que la dirección quede centrada */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   color: #333;
   font-size: 13px;
@@ -42,28 +38,13 @@ export default {
   margin: 0;
 }
 
-.footer-right {
-  display: flex;
-  gap: 20px;
-}
-.footer-right span {
-  cursor: pointer;
-}
-.footer-right span:hover {
-  text-decoration: underline;
-}
-
 /* Móviles y tablets: apilar los textos */
 @media (max-width: 768px) {
   .footer {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     text-align: center;
-    gap: 15px;
+    gap: 10px;
     padding: 20px;
-  }
-  .footer-right {
-    justify-content: center;
-    flex-wrap: wrap;
   }
 }
 </style>
