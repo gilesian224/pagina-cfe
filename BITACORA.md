@@ -691,3 +691,19 @@ Llenar el área central de Inicio, que había quedado vacía, combinando una pre
 3. **Enlace.** "Ver escenario tecnológico completo ›" es un `<router-link>` a `/escenario-tecnologico`, la página con el detalle por nivel de tensión.
 
 **Importante:** las cifras son los totales de la página Escenario Tecnológico (230 subestaciones, 2,726 km de líneas, 504 interruptores, 7,572 MVA), pero están escritas por separado. Si se actualizan allá, hay que cambiarlas también en `InicioView.vue`.
+
+### Logo ZOTPTX actualizado
+
+**Qué se pidió**
+Reemplazar el logo de ZOTPTX de la barra superior por una versión nueva, en la que las torres están en gris claro y destacan el contorno verde del mapa y el texto "ZOTPTX".
+
+**Estado:** en revisión (pull request abierto). Depende del PR #18: primero se une #18 y después este.
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/assets/logo-zotptx.jpg` | Se reemplaza por el logo nuevo, reducido de 1254 a 330 px (24 KB). |
+
+**Cómo funciona**
+El archivo nuevo conserva el nombre `logo-zotptx.jpg`, así que `NavBar.vue` no cambia: su `<img src="@/assets/logo-zotptx.jpg">` toma el logo nuevo automáticamente. Se redujo a 330 px porque en pantalla se muestra a 110 px de alto como máximo; con el triple de resolución se ve nítido en pantallas de alta densidad y la página carga más rápido que con la imagen original.
