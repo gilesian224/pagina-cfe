@@ -119,6 +119,7 @@ export const menus = {
         texto: 'Control',
         ruta: null,
         subopciones: [
+          { texto: 'SCADA', url: 'http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp' },
           { texto: 'SENTOCs', url: 'https://10.29.23.135/acceso.asp' },
           { texto: 'Sabadd', url: 'http://10.29.23.131/sabadd/index.php' }
         ]
