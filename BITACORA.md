@@ -759,10 +759,10 @@ Al quitar el bloque de la derecha, con el acomodo anterior (`flex` con `space-be
 
 ## 2026-11-19
 
-### Más enlaces en los menús; regresan SCADA y Sabadd con submenús
+### Más enlaces en los menús de Operación y Programación y Equipos
 
 **Qué se pidió**
-Vincular nuevos enlaces en los menús de Operación y Programación y Equipos.
+Poner nuevos enlaces en las opciones del menú donde encajen, sin cambiar los nombres ni la estructura del menú.
 
 **Estado:** en revisión (pull request abierto).
 
@@ -770,7 +770,7 @@ Vincular nuevos enlaces en los menús de Operación y Programación y Equipos.
 
 | Archivo | Cambio |
 |---|---|
-| `src/data/menus.js` | 7 opciones ahora llevan `url`; SCADA regresa y, junto con Sabadd, pasa a ser desplegable con dos enlaces. |
+| `src/data/menus.js` | 6 opciones cambian `ruta` por `url`. |
 
 **Enlaces conectados**
 
@@ -781,22 +781,18 @@ Vincular nuevos enlaces en los menús de Operación y Programación y Equipos.
 | Operación › Operación | Procedimientos | `http://normateca.cfemex.com/normateca2019/default.aspx` |
 | Operación › SIASAM | Relieve | `http://10.25.117.67/HerramientasSolicitudesLicencias/SolicitudesLicencias/SolicitudesLicencias.php` |
 | Operación › Análisis › SIMOCE | DDCOR | `https://dcor.cfemex.com/Pages/Index.aspx` |
-| Programación y Equipos › Control › SCADA | PyE ZOTGM | `http://10.25.117.67/zotgm/PyE-ZOTGM.php` |
-| Programación y Equipos › Control › SCADA | Alarmas y eventos SITRACEN | `http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp` |
-| Programación y Equipos › Control › Sabadd | SABaDD (OKALSI) | `https://sabadd.okalsi.com/administrar/` |
-| Programación y Equipos › Control › Sabadd | Inserta Sabadd | `http://10.30.84.50/rezo/Monarch/Inserta_Sabadd` |
 | Programación y Equipos › Control de gestión | Mesa de servicio | `http://10.21.6.134/MASI/PH0A0/Auth/Acceder` |
 
-SENTOCs ya tenía su enlace (`https://10.29.23.135/acceso.asp`) y no cambió.
+Guías y Procedimientos venían juntos con una sola dirección (la Normateca), así que las dos apuntan a ella. SENTOCs ya tenía su enlace y no cambió.
 
-**Cómo se interpretó la petición**
-- **SCADA** se había quitado el 11 de noviembre. Regresa como primera opción de Control, ahora desplegable, porque trae dos enlaces.
-- **Sabadd** también trae dos enlaces, así que pasa a ser desplegable. Su enlace anterior (`http://10.29.23.131/sabadd/index.php`) se reemplaza por los dos nuevos.
-- **Guías** y **Procedimientos** venían juntos con una sola dirección (la Normateca), así que las dos apuntan a ella.
-- Los nombres de los submenús ("PyE ZOTGM", "Alarmas y eventos SITRACEN", "SABaDD (OKALSI)", "Inserta Sabadd") se tomaron de sus direcciones.
+**Enlaces que no se usaron (no hay una opción donde encajen)**
+- SCADA: `http://10.25.117.67/zotgm/PyE-ZOTGM.php` y `http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp`. La opción SCADA se quitó del menú el 11 de noviembre.
+- Sabadd: `https://sabadd.okalsi.com/administrar/` y `http://10.30.84.50/rezo/Monarch/Inserta_Sabadd`. Sabadd se dejó con su enlace original (`http://10.29.23.131/sabadd/index.php`), a petición de Ian.
+
+Una primera versión de este cambio regresaba SCADA y convertía Sabadd en desplegable con submenús nuevos; se descartó para no modificar la estructura del menú.
 
 **Cómo funciona**
-Una opción con dos enlaces no puede llevar dos `url`, así que se convierte en desplegable: `ruta: null` y una lista de `subopciones`, cada una con su propia `url`. `MenuOpcion.vue` la dibuja con ▸ y al abrirla muestra los dos enlaces con ↗.
+En `menus.js`, a cada opción se le cambió `ruta` por `url`. `MenuOpcion.vue` revisa primero si hay `url`, así que la opción abre el sistema en una pestaña nueva con ↗.
 
 **Opciones que siguen sin enlace (abren su página con título)**
 - Superintendencia: FODA

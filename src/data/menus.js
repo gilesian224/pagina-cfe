@@ -119,23 +119,8 @@ export const menus = {
         texto: 'Control',
         ruta: null,
         subopciones: [
-          {
-            texto: 'SCADA',
-            ruta: null,
-            subopciones: [
-              { texto: 'PyE ZOTGM', url: 'http://10.25.117.67/zotgm/PyE-ZOTGM.php' },
-              { texto: 'Alarmas y eventos SITRACEN', url: 'http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp' }
-            ]
-          },
           { texto: 'SENTOCs', url: 'https://10.29.23.135/acceso.asp' },
-          {
-            texto: 'Sabadd',
-            ruta: null,
-            subopciones: [
-              { texto: 'SABaDD (OKALSI)', url: 'https://sabadd.okalsi.com/administrar/' },
-              { texto: 'Inserta Sabadd', url: 'http://10.30.84.50/rezo/Monarch/Inserta_Sabadd' }
-            ]
-          }
+          { texto: 'Sabadd', url: 'http://10.29.23.131/sabadd/index.php' }
         ]
       },
       {
