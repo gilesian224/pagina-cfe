@@ -69,7 +69,7 @@ export const menus = {
         subopciones: [
           { texto: 'Consulta de solicitudes y licencias', url: 'http://10.72.111.102/ReportesRelieve/Home/LogIn' },
           { texto: 'Sistema web de salidas forzadas', url: 'https://servicios.cenace.gob.mx/SWSF/' },
-          { texto: 'Calendario SIASAM', ruta: '/operacion/cenace/calendario-siasam' },
+          { texto: 'Calendario SIASAM', url: 'http://10.25.117.67/HerramientasSolicitudesLicencias/FormatoSIASAM/FormatoSIASAM.php' },
           { texto: 'Formato de carga masiva', ruta: '/operacion/cenace/formato-carga-masiva' }
         ]
       },
@@ -79,8 +79,8 @@ export const menus = {
         subopciones: [
           { texto: 'Acciones de control', ruta: '/operacion/operacion/acciones-control' },
           { texto: 'Código de red 1 y 2', ruta: '/operacion/operacion/codigo-red' },
-          { texto: 'Guías', ruta: '/operacion/operacion/guias' },
-          { texto: 'Procedimientos', ruta: '/operacion/operacion/procedimientos' },
+          { texto: 'Guías', url: 'http://normateca.cfemex.com/normateca2019/default.aspx' },
+          { texto: 'Procedimientos', url: 'http://normateca.cfemex.com/normateca2019/default.aspx' },
           { texto: 'Directorios', ruta: '/operacion/operacion/directorios' },
           { texto: 'Cemodat web', url: 'https://cemodat.appstr.cfe.mx/login' }
         ]
@@ -89,7 +89,7 @@ export const menus = {
         texto: 'SIASAM',
         ruta: null,
         subopciones: [
-          { texto: 'Relieve', ruta: '/operacion/siasam/relieve' },
+          { texto: 'Relieve', url: 'http://10.25.117.67/HerramientasSolicitudesLicencias/SolicitudesLicencias/SolicitudesLicencias.php' },
           { texto: 'Sonorel', url: 'http://10.25.117.65/Relieve/SoNoRelGMO/login.aspx' }
         ]
       },
@@ -101,7 +101,7 @@ export const menus = {
             texto: 'SIMOCE',
             ruta: null,
             subopciones: [
-              { texto: 'DDCOR', ruta: '/operacion/analisis/simoce/ddcor' },
+              { texto: 'DDCOR', url: 'https://dcor.cfemex.com/Pages/Index.aspx' },
               { texto: 'DDSE', ruta: '/operacion/analisis/simoce/ddse' }
             ]
           },
@@ -119,8 +119,23 @@ export const menus = {
         texto: 'Control',
         ruta: null,
         subopciones: [
+          {
+            texto: 'SCADA',
+            ruta: null,
+            subopciones: [
+              { texto: 'PyE ZOTGM', url: 'http://10.25.117.67/zotgm/PyE-ZOTGM.php' },
+              { texto: 'Alarmas y eventos SITRACEN', url: 'http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp' }
+            ]
+          },
           { texto: 'SENTOCs', url: 'https://10.29.23.135/acceso.asp' },
-          { texto: 'Sabadd', url: 'http://10.29.23.131/sabadd/index.php' }
+          {
+            texto: 'Sabadd',
+            ruta: null,
+            subopciones: [
+              { texto: 'SABaDD (OKALSI)', url: 'https://sabadd.okalsi.com/administrar/' },
+              { texto: 'Inserta Sabadd', url: 'http://10.30.84.50/rezo/Monarch/Inserta_Sabadd' }
+            ]
+          }
         ]
       },
       {
@@ -129,7 +144,7 @@ export const menus = {
         subopciones: [
           { texto: 'SIITIC', url: 'http://siitic.cfemex.com/shell/logon' },
           { texto: 'SIECOM', url: 'http://10.25.15.142:8080/inventario/Welcome.do' },
-          { texto: 'Mesa de servicio', ruta: '/programacion-equipos/control-gestion/mesa-servicio' }
+          { texto: 'Mesa de servicio', url: 'http://10.21.6.134/MASI/PH0A0/Auth/Acceder' }
         ]
       },
       { texto: 'AM (inventario)', url: 'http://10.25.117.65/ControlInventarioWebSite/Inicio.aspx' },

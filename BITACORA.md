@@ -754,3 +754,51 @@ Quitar de la barra amarilla del pie de página los textos "Políticas de privaci
 
 **Cómo funciona**
 Al quitar el bloque de la derecha, con el acomodo anterior (`flex` con `space-between`) la dirección se habría ido hasta la derecha. Por eso el pie ahora usa `display: grid` con `grid-template-columns: 1fr auto 1fr`: "CFE" queda en la columna izquierda, la dirección y el teléfono en la columna central (que mide lo que su texto) y la columna derecha queda vacía. Como las columnas laterales miden lo mismo (`1fr`), la dirección queda centrada en la página. En celular, el pie pasa a una sola columna con todo centrado.
+
+---
+
+## 2026-11-19
+
+### Más enlaces en los menús; regresan SCADA y Sabadd con submenús
+
+**Qué se pidió**
+Vincular nuevos enlaces en los menús de Operación y Programación y Equipos.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | 7 opciones ahora llevan `url`; SCADA regresa y, junto con Sabadd, pasa a ser desplegable con dos enlaces. |
+
+**Enlaces conectados**
+
+| Menú | Opción | Dirección |
+|---|---|---|
+| Operación › CENACE | Calendario SIASAM | `http://10.25.117.67/HerramientasSolicitudesLicencias/FormatoSIASAM/FormatoSIASAM.php` |
+| Operación › Operación | Guías | `http://normateca.cfemex.com/normateca2019/default.aspx` |
+| Operación › Operación | Procedimientos | `http://normateca.cfemex.com/normateca2019/default.aspx` |
+| Operación › SIASAM | Relieve | `http://10.25.117.67/HerramientasSolicitudesLicencias/SolicitudesLicencias/SolicitudesLicencias.php` |
+| Operación › Análisis › SIMOCE | DDCOR | `https://dcor.cfemex.com/Pages/Index.aspx` |
+| Programación y Equipos › Control › SCADA | PyE ZOTGM | `http://10.25.117.67/zotgm/PyE-ZOTGM.php` |
+| Programación y Equipos › Control › SCADA | Alarmas y eventos SITRACEN | `http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp` |
+| Programación y Equipos › Control › Sabadd | SABaDD (OKALSI) | `https://sabadd.okalsi.com/administrar/` |
+| Programación y Equipos › Control › Sabadd | Inserta Sabadd | `http://10.30.84.50/rezo/Monarch/Inserta_Sabadd` |
+| Programación y Equipos › Control de gestión | Mesa de servicio | `http://10.21.6.134/MASI/PH0A0/Auth/Acceder` |
+
+SENTOCs ya tenía su enlace (`https://10.29.23.135/acceso.asp`) y no cambió.
+
+**Cómo se interpretó la petición**
+- **SCADA** se había quitado el 11 de noviembre. Regresa como primera opción de Control, ahora desplegable, porque trae dos enlaces.
+- **Sabadd** también trae dos enlaces, así que pasa a ser desplegable. Su enlace anterior (`http://10.29.23.131/sabadd/index.php`) se reemplaza por los dos nuevos.
+- **Guías** y **Procedimientos** venían juntos con una sola dirección (la Normateca), así que las dos apuntan a ella.
+- Los nombres de los submenús ("PyE ZOTGM", "Alarmas y eventos SITRACEN", "SABaDD (OKALSI)", "Inserta Sabadd") se tomaron de sus direcciones.
+
+**Cómo funciona**
+Una opción con dos enlaces no puede llevar dos `url`, así que se convierte en desplegable: `ruta: null` y una lista de `subopciones`, cada una con su propia `url`. `MenuOpcion.vue` la dibuja con ▸ y al abrirla muestra los dos enlaces con ↗.
+
+**Opciones que siguen sin enlace (abren su página con título)**
+- Superintendencia: FODA
+- Operación: FODA · CENACE › Formato de carga masiva · Operación › Acciones de control, Código de red 1 y 2, Directorios · Análisis › SIMOCE › DDSE
+- Programación y Equipos: FODA, Comunicaciones, PM
