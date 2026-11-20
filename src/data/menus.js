@@ -101,8 +101,7 @@ export const menus = {
             texto: 'SIMOCE',
             ruta: null,
             subopciones: [
-              { texto: 'DDCOR', url: 'https://dcor.cfemex.com/Pages/Index.aspx' },
-              { texto: 'DDSE', ruta: '/operacion/analisis/simoce/ddse' }
+              { texto: 'DDCOR', url: 'https://dcor.cfemex.com/Pages/Index.aspx' }
             ]
           },
           { texto: 'SISNOV', url: 'http://novedades-sdt.cfemex.com/novedades/sisnov_nacional.html' }

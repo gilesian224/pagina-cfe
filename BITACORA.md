@@ -797,5 +797,8 @@ En `menus.js`, a cada opción se le cambió `ruta` por `url`. `MenuOpcion.vue` r
 
 **Opciones que siguen sin enlace (abren su página con título)**
 - Superintendencia: FODA
-- Operación: FODA · CENACE › Formato de carga masiva · Operación › Acciones de control, Código de red 1 y 2, Directorios · Análisis › SIMOCE › DDSE
+- Operación: FODA · CENACE › Formato de carga masiva · Operación › Acciones de control, Código de red 1 y 2, Directorios
 - Programación y Equipos: FODA, Comunicaciones, PM
+
+**Se quita DDSE**
+A petición de Ian se quitó la opción **DDSE** de Operación › Análisis › SIMOCE, junto con su ruta en el router. SIMOCE queda solo con DDCOR. No se borró ningún archivo, porque DDSE usaba la página genérica `PaginaSeccionView.vue`.
