@@ -55,7 +55,6 @@ const routes = [
   { path: '/operacion/siasam/relieve', name: 'op-relieve', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Relieve' } },
   { path: '/operacion/siasam/sonorel', name: 'op-sonorel', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'Sonorel' } },
   { path: '/operacion/analisis/simoce/ddcor', name: 'op-ddcor', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'DDCOR' } },
-  { path: '/operacion/analisis/simoce/ddse', name: 'op-ddse', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'DDSE' } },
   { path: '/operacion/analisis/sisnov', name: 'op-sisnov', component: PaginaSeccionView, meta: { seccion: 'operacion', titulo: 'SISNOV' } },
   // Programación y Equipos: páginas sin contenido todavía; usan la página genérica con su título
   { path: '/programacion-equipos', name: 'programacion-equipos', component: PaginaSeccionView, meta: { seccion: 'programacion-equipos', titulo: 'Programación y Equipos' } },

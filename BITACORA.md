@@ -754,3 +754,51 @@ Quitar de la barra amarilla del pie de página los textos "Políticas de privaci
 
 **Cómo funciona**
 Al quitar el bloque de la derecha, con el acomodo anterior (`flex` con `space-between`) la dirección se habría ido hasta la derecha. Por eso el pie ahora usa `display: grid` con `grid-template-columns: 1fr auto 1fr`: "CFE" queda en la columna izquierda, la dirección y el teléfono en la columna central (que mide lo que su texto) y la columna derecha queda vacía. Como las columnas laterales miden lo mismo (`1fr`), la dirección queda centrada en la página. En celular, el pie pasa a una sola columna con todo centrado.
+
+---
+
+## 2026-11-19
+
+### Más enlaces en los menús de Operación y Programación y Equipos
+
+**Qué se pidió**
+Poner nuevos enlaces en las opciones del menú donde encajen, sin cambiar los nombres ni la estructura del menú.
+
+**Estado:** en revisión (pull request abierto).
+
+**Archivos**
+
+| Archivo | Cambio |
+|---|---|
+| `src/data/menus.js` | 6 opciones cambian `ruta` por `url`, y regresa SCADA con su enlace. |
+
+**Enlaces conectados**
+
+| Menú | Opción | Dirección |
+|---|---|---|
+| Operación › CENACE | Calendario SIASAM | `http://10.25.117.67/HerramientasSolicitudesLicencias/FormatoSIASAM/FormatoSIASAM.php` |
+| Operación › Operación | Guías | `http://normateca.cfemex.com/normateca2019/default.aspx` |
+| Operación › Operación | Procedimientos | `http://normateca.cfemex.com/normateca2019/default.aspx` |
+| Operación › SIASAM | Relieve | `http://10.25.117.67/HerramientasSolicitudesLicencias/SolicitudesLicencias/SolicitudesLicencias.php` |
+| Operación › Análisis › SIMOCE | DDCOR | `https://dcor.cfemex.com/Pages/Index.aspx` |
+| Programación y Equipos › Control de gestión | Mesa de servicio | `http://10.21.6.134/MASI/PH0A0/Auth/Acceder` |
+| Programación y Equipos › Control | SCADA | `http://10.25.117.106:8080/AlarmasEventosSITRACEN/AlarmasEventos.jsp` (Alarmas y eventos SITRACEN) |
+
+Guías y Procedimientos venían juntos con una sola dirección (la Normateca), así que las dos apuntan a ella. SENTOCs ya tenía su enlace y no cambió.
+
+**Enlaces que no se usaron (no hay una opción donde encajen)**
+- SCADA (segundo enlace): `http://10.25.117.67/zotgm/PyE-ZOTGM.php`. SCADA regresó al menú como opción simple con el enlace de Alarmas y eventos SITRACEN, a petición de Ian; una opción simple solo puede llevar un enlace.
+- Sabadd: `https://sabadd.okalsi.com/administrar/` y `http://10.30.84.50/rezo/Monarch/Inserta_Sabadd`. Sabadd se dejó con su enlace original (`http://10.29.23.131/sabadd/index.php`), a petición de Ian.
+
+Una primera versión de este cambio regresaba SCADA y convertía Sabadd en desplegable con submenús nuevos; se descartó para no modificar la estructura del menú.
+
+**Cómo funciona**
+En `menus.js`, a cada opción se le cambió `ruta` por `url`. `MenuOpcion.vue` revisa primero si hay `url`, así que la opción abre el sistema en una pestaña nueva con ↗.
+
+**Opciones que siguen sin enlace (abren su página con título)**
+- Superintendencia: FODA
+- Operación: FODA · CENACE › Formato de carga masiva · Operación › Acciones de control, Código de red 1 y 2, Directorios
+- Programación y Equipos: FODA, Comunicaciones, PM
+
+**Se quita DDSE**
+A petición de Ian se quitó la opción **DDSE** de Operación › Análisis › SIMOCE, junto con su ruta en el router. SIMOCE queda solo con DDCOR. No se borró ningún archivo, porque DDSE usaba la página genérica `PaginaSeccionView.vue`.
